@@ -1,0 +1,376 @@
+
+function getOMCookie(name) {
+    name += "=";
+    var len = name.length;
+    var cookiestr = document.cookie;
+    var namepos = cookiestr.indexOf(name);
+    var returnvalue=null;
+    if (namepos>-1) {
+        returnvalue=cookiestr.substr(namepos+name.length);
+        if (returnvalue.indexOf(";")>0) {
+            returnvalue=returnvalue.substring(0,returnvalue.indexOf(";"));
+        }
+    }
+    return returnvalue;
+}
+
+function generateAndShowSurveyVoucherLayer() {
+	 if (typeof $.i18n !== 'undefined') {
+		if (!$.i18n.containsBundles('desktop.general')) {
+			$.i18n.init({
+				requestedBundles : [ 'DESKTOP_GENERAL' ]
+			});
+		}
+	 
+		var $Wrapper = $('<div>', {
+			'id' : 'surveyLayerContent'
+		});
+		var $Heading = $('<div>', {
+			'id' : 'surveyHeading'
+		});
+		var $Content = $('<div>', {
+			'id' : 'surveyContent'
+		});
+		var $Footer = $('<div>', {
+			'id' : 'surveyFooter'
+		});
+		
+		$Heading.html($.i18n.message('desktop.general', 'survey.voucher.heading'));
+		var $Content1 = $('<p>', {
+			'class' : 'surveyVoucherContent1'
+		});
+		$Content1.html($.i18n.message('desktop.general', 'survey.voucher.content1', ['10.-']));
+		var $Content2 = $('<p>', {
+			'class' : 'surveyVoucherContent2'
+		});
+		$Content2.html($.i18n.message('desktop.general', 'survey.voucher.content2'));
+		var $Content3 = $('<p>', {
+			'class' : 'surveyVoucherContent3'
+		});
+		$Content3.html($.i18n.message('desktop.general', 'survey.voucher.content3'));
+		$Content.append($Content1);
+		$Content.append($Content2);
+		$Content.append($Content3);
+		$Footer.html($.i18n.message('desktop.general', 'survey.voucher.footer'));	
+		
+		$Wrapper.append($Heading);
+		$Wrapper.append($Content);
+		$Wrapper.append($Footer);
+		
+		hei.cl.widgets.dialog.layer($Wrapper, 'surveyLayer', {
+			'width' : '440px',
+			'modal' : 'true'
+		});
+	}
+}
+
+function setOMCookie(name, value, expires, path) {
+    var exp = new Date();
+    if (typeof(value)=='undefined' || (typeof(value)!='number' && value=='')) {
+        expires=-1;
+        value='-1';
+    }
+    var new_cookie = name + "=" + value;
+    if (typeof(expires)!="undefined" && expires!=null) {
+        if (expires>0) {
+            exp.setTime(exp.getTime() + expires);
+        }
+        else {
+            exp.setTime(exp.getTime() - expires);
+        }
+        new_cookie+= "; expires=" + exp.toUTCString();
+    }
+    if (path!=null) {
+        new_cookie+="; path=" + path+";";
+    }
+    else {
+        new_cookie+="; path=/;";
+    }
+    document.cookie=new_cookie;
+}
+
+
+				
+var callFinished = 0;
+var minExceeded = 0;
+	
+function hideLayer(aMinExceeded, aCallFinished) {
+	minExceeded += aMinExceeded;
+	callFinished += aCallFinished;
+	if (minExceeded > 0 && callFinished > 0) 
+	{
+		$('#couponLayer').remove();
+		
+		if (getECookie('vkfShown') || $('#vkfLayer').length==0)
+		{
+		    	$('#overlay').remove();
+		}
+		
+	}
+};
+
+$.i18n.init({requestedBundles:['DESKTOP_GENERAL']});
+var pleaseWait = '<div id="pleasewait" class="clearfix">' 
+				+ '<table cellpadding="6"  ce border="1" width="500" align="center">'
+				+ '<tbody><tr><td align="center">'
+				+ '<div style="margin: 50px 0 20px 0;"><font size="3"><b>'+$.i18n.map['desktop.general']['om.wait.benefit.1']+'</b></font></div>'
+				+ '<img src="/HeineStorefrontAssetStore/images/symbol/ajax-loader_grey.gif" border="0" align="top" alt="please wait">'
+				+ '<div style="background-color: #EFEFEF; margin: 30px 0 30px; border: 1px dotted #B4B4B4; border-style:dotted none;">'
+				+ '<div style="margin:-15px 15px -5px 60px; display:inline-block;"><img src="/HeineStorefrontAssetStore/images/icons/benefit_basket.png" border="0" align="top" alt=""></div>'
+				+ '<div style="width:300px; text-align:left; vertical-align:middle; display:inline-block;"><font size="2">'+$.i18n.map['desktop.general']['om.wait.benefit.2']+'</font></div>'
+				+ '</div></div>'
+				+ '</td></tr></tbody></table>'
+				+ '</div>';
+	var basketRecoveryLayerEnabled = false;
+	
+	var iwlChanged=false;
+	$(document).ready(function(){
+	/*
+class vkfLayer
+--------------
+redeeming vouchers, generating and showing HTML layers on success
+
+@param pid: private | unique id identifying VKF layer
+@param valid: private | string date, valid until...
+@param iwl: private | marketing channel
+@param mbw: private | minimum oder value
+
+dependencies: jquery-library; i18n-bundle
+example
+vkfLayer(1,'11.11.2015',76,30)
+*/
+function vkfLayer(pid,valid,mbw,intid,iwl)
+{
+	var layerId=pid;
+	var day=parseInt(valid.slice(0,2));
+	var month=valid.slice(2,4);
+	month = parseInt(month);
+	var year=valid.slice(4,8);
+	var currYear = new Date().getFullYear()+'';
+	year = currYear.substring(0,currYear.length-year.length) + year;
+	var validUntil=day+"."+month+"."+year;
+	voucherDate=new Date(year,month-1,String(parseInt(day)+1));
+	actDate=new Date(); 
+	var mbw=mbw;
+	var intid=intid;
+	var iwl=iwl;
+	var html=String();
+
+	
+	/*public | initialization of Layer */
+	this.init=function(){
+		if (actDate.getTime()<voucherDate.getTime())
+		{
+			if (!getECookie('vkfShown'))
+			{
+				setECookie('vkf',layerId+'#'+valid+'#'+mbw+'#'+intid+'#'+iwl,actDate.getTime()-voucherDate.getTime(),'/');
+				generateHTML();
+				if (basketRecoveryLayerEnabled) {
+					hei.cl.widgets.dialog.layer(html,'vkfLayer',{'width':'440px', 'closecallback': function(){BasketRecoveryLayerJS.initVKFDone();}, 'modal':'true','zIndex':'901'});
+				} else {
+					hei.cl.widgets.dialog.layer(html,'vkfLayer',{'width':'440px', 'modal':'true','zIndex':'901'});
+				}
+				setECookie('vkfShown',true);
+			}
+		}
+		else
+		{
+			$('#overlay').remove();
+		}
+	};
+	
+	
+	/* private | generating HTML for Layer */
+	generateHTML=function(){
+		try
+		{
+			$.i18n.init({requestedBundles:['DESKTOP_GENERAL']});
+			var innerlayer=$('<div>');
+			innerlayer.addClass('innerVKF');
+			var heading=$('<div>');
+			heading.addClass('headingVKF');
+			heading.html($.i18n.map['desktop.general']['vkf.header.'+layerId]);
+			var ribbon=$('<div>');
+			if(pid!==14)
+			ribbon.addClass('ribbonVKF');
+			else
+			ribbon.addClass('bloodyVKF');
+			var agbdiv=$('<div>');
+			agbdiv.addClass('textVKF');
+			var dateVKF=$('<div>');
+			dateVKF.addClass('dateVKF');
+			var dateVKF_html=$.i18n.map['desktop.general']['vkf.valid']+validUntil;
+			if (mbw!=0)
+			{
+				dateVKF_html+='<br>'+$.i18n.map['desktop.general']['vkf.mbw']+mbw+$.i18n.map['desktop.general']['vkf.curr'];
+			}
+			dateVKF.html(dateVKF_html);
+			var coupontext=$('<div>');
+			coupontext.addClass('couponVKF');
+			coupontext.html($.i18n.map['desktop.general']['vkf.bonustext.'+layerId]);
+			
+
+			if (pid==11)
+			{
+				innerlayer.addClass('innerVKF11');
+				heading.addClass('heading11');
+				ribbon.addClass('happywife');
+				agbdiv.html($.i18n.map['desktop.general']['vkf.agb.2']);
+				agbdiv.addClass('text11');
+				var stoerer=$('<div>');
+				stoerer.addClass('stoerer');
+				dateVKF.addClass('date11');
+				coupontext.addClass('coupon11');
+				stoerer.html($.i18n.map['desktop.general']['vkf.ribbon.'+layerId]);
+			}
+			else
+			{
+				if (pid==3 || pid==10)
+				{
+					var shippingfree=$('<div>');
+					shippingfree.addClass('blackbarVKF');
+					shippingfree.html('+ '+$.i18n.map['desktop.general']['vkf.freeship']);
+				}
+				var ribbontext=$('<div>');
+				if(pid!==14)
+				ribbontext.addClass('ribbontextVKF');
+				if ($.i18n.map['desktop.general']['vkf.country'].indexOf('CH')!=-1 && $.i18n.map['desktop.general']['vkf.language']=='deutsch')
+				{
+					ribbontext.addClass('ch');
+				}
+				if ($.i18n.map['desktop.general']['vkf.language']=='francais ')
+				{
+					ribbontext.addClass('frribbon');
+				}
+				ribbontext.html($.i18n.map['desktop.general']['vkf.ribbon.'+layerId]);
+				ribbon.append(ribbontext);
+				if(pid===14)
+				{
+					agbdiv.html($.i18n.map['desktop.general']['vkf.agb.14']);
+				}
+				else
+				agbdiv.html($.i18n.map['desktop.general']['vkf.agb.1']);
+	
+			}
+				
+			innerlayer.append(heading);
+			innerlayer.append(ribbon);
+			if (pid==11)
+			{
+				innerlayer.append(stoerer);
+			}
+			innerlayer.append(coupontext);
+			innerlayer.append(dateVKF);
+			
+			innerlayer.append(agbdiv);
+			if(typeof(shippingfree)!="undefined")
+			{
+				innerlayer.append(shippingfree);
+			}
+			html=innerlayer;
+			return true;
+		}
+		catch (e)
+		{
+			if (typeof(console)=="object")
+			{
+				console.log("Fehler beim Erzeugen des PID HTML: "+e)
+				return false;
+			}
+		}	
+	};
+}
+		var vkfCookie=getOMCookie('vkf')
+		if (vkfCookie && !getECookie('vkfShown') && !iwlChanged)
+		{
+			var vkfValues=vkfCookie.split('#');
+
+			if (vkfValues[5]!=getOMCookie('IWL'))
+			{
+				iwlChanged=true;
+			}
+			if (!iwlChanged ||iwlChanged==null)
+			{   
+			    hei.cl.widgets.dialog.layerWithOverlay(pleaseWait,'couponLayer');
+			    setTimeout(function(){hideLayer(1, 0)}, 3000);
+				$.ajax({
+					dataType: "json",
+					url:"https://www.heine.de/AjaxPromotionCodeManage?storeId=1&taskType=A&extCall="+"&promoCode="+vkfCookie[3]
+				}).done(function() {
+					hideLayer(0, 1);
+				}).fail(function() {
+					hideLayer(0, 1);
+					console.log('error while adding promotion code');
+				}).success(
+				function(){
+		
+		
+					var vkf=new vkfLayer(vkfValues[0],vkfValues[1],vkfValues[2],vkfValues[3],vkfValues[4],vkfValues[5]);
+		
+					if (typeof(vkf)=='object')
+					{
+						vkf.init();
+					}
+				});
+			}
+			
+		}
+	});
+	/*
+Einsprung ueber ExternalCall??? Nicht mehr ueberschreiben
+*/
+var wkziwl_sess=getOMCookie("wkziwl_sess");
+
+
+if (getOMCookie("extcall_loaded")==null && wkziwl_sess!="true")
+{
+	var actDate = new Date();
+	/*
+	30 Tage gueltig
+	*/
+	var timeToDie=(30 * 24 * 60 * 60 * 1000);
+	var whereFrom=document.referrer;
+	if (whereFrom!="")
+	{
+		var whereFromArray=whereFrom.split(".");
+		whereFrom=whereFromArray[0]+whereFromArray[1];
+	}
+	if (whereFrom.match("heine") == null && whereFrom.match("localhost")==null)
+	{
+		/*
+		Referrer nicht leer --> SEO
+		*/
+		if (whereFrom!="undefined" && whereFrom!="") //SEO
+		{
+			//has to be global, for econda access
+			emos_clickIn = 1;
+			setOMCookie("WKZ", "52", timeToDie,"/");
+			setOMCookie("IWL", "27", timeToDie,"/");
+			if (getOMCookie("entrycodeaffili")!=null)
+			{
+				setOMCookie("entrycodeaffili", "SEO", timeToDie,"/");
+			}
+			/*
+			 * SEO Einstieg entfernt PixID
+			 * */
+			if (getOMCookie("PixID")!=null)
+			{
+				setOMCookie("PixID", "SEO", -1,"/");
+			}
+		}
+		/*
+		Referrer leer Direkteinstieg
+		*/
+		else if (getOMCookie("WKZ")==null && getOMCookie("IWL")==null) //Direkt
+		{
+			timeToDie=(1 * 24 * 60 * 60 * 1000);
+			setOMCookie("WKZ", "76", timeToDie,"/");
+			setOMCookie("IWL", "10", timeToDie,"/");
+		}
+		/*
+		nicht unbedingt notwendig, da ohnehin nicht mehr mit Direkteinstieg
+		ueberschrieben werden kann, solange IWL/WKZ Cookie gesetzt
+		*/
+		setOMCookie("wkziwl_sess","true",0,"/");		
+	}
+}

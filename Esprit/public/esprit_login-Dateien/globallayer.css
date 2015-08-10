@@ -1,0 +1,59 @@
+.globallayer {
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+
+#globallayer_closer {
+    position: absolute;
+    width: 105px;
+    height: 30px;
+    top: 0;
+    right: 0;
+    z-index: 12;
+    cursor: pointer;
+}
+
+.globallayer_close {
+    position: absolute;
+    height: 35px;
+    right: 8px;
+    top: 7px;
+    z-index: 12;
+    cursor: pointer;
+}
+
+.globallayer_close_withouttext {
+    position: absolute;
+    height: 35px;
+    right: 20px;
+    top: 20px;
+    z-index: 12;
+    cursor: pointer;
+}
+
+.globallayer_close_text {
+    color: #000000;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-right: 0;
+}
+
+.globallayer_close img {
+    vertical-align: middle;
+}
+
+.ie .globallayer_close img {
+    vertical-align: none;
+    margin-top: -2px;
+}
+
+.globallayer_closer_pic {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+
+.globallayer_close .hidden {
+    display: none !important;
+}

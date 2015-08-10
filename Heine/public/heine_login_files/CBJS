@@ -1,0 +1,220 @@
+
+var cbSendMailUrl='https://www.heine.de/SendMail?storeId=1';
+livechatURL="https://chat.heine.de/ichat/popup.html?cat=HV_Chat";
+var liveChatOpen="false";
+
+$.fn.center = function (topSpace) {
+  this.css("position","absolute");
+
+   if (typeof(topSpace)=="undefined" || topSpace==null)
+   {
+    this.css("top", "80px");
+   }
+   else
+   {
+    this.css("top",topSpace+"px");
+    }
+  this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+  return this;
+}
+openCBLayer=function()
+{
+    if (typeof($("#overlay").attr('id'))=='undefined')
+    {
+        $('body').append('<div id="overlay" />');
+    }
+    $('body').append($("#cbLayer"));
+    $("#cbLayer").show();
+    $("#overlay").show();
+    $("#cbLayer").center();
+
+}
+closeCBLayer=function()
+{
+    $("#cbLayer").hide();
+    $("#overlay").hide();
+}
+
+
+$(document).ready(
+function(){
+	$("#callbackSticky").click(
+    function()
+    {
+        openCBLayer();
+    }
+    );
+	$("#callback").click(
+    function()
+    {
+        openCBLayer();
+    }
+    );
+    $("li#callback a").click(
+    function()
+    {
+        openCBLayer();
+    }
+    );
+    $("#closeCB").click(
+    function()
+    {
+        closeCBLayer();
+    }
+    );
+    
+    
+    if (typeof(e_template)!="undefined" && e_template=="sh_detailview")
+    {
+        livechatURL+="&pn="+$(".articleno span").html()+"&p="+$(".dv_ueberschrift").html();
+    }
+    openChat=function(){
+    	
+
+    	if($('#cbKunu').length)
+    	{
+    		
+    		livechatURL+='&cn='+$('#cbKunu').val();
+    		livechatURL+='&ct='+$('#cbGender').val();
+    		livechatURL+='&c='+$('#cbSurname').val()+'_'+$('#cbName').val();
+    	}
+        window.open(livechatURL, "Heine_LiveChat", "width=530,height=640,scrollbars=no").focus();
+		liveChatOpen = "true";
+    };
+    $("li#livechat").click(function(){
+    openChat();
+    });
+    $("li#livechatSticky").click(function(){
+    openChat();
+    });
+    
+
+
+
+$("#cbFormButton").click(function()
+{
+	$.ajax({
+		dataType: 'json',
+		url: 'https://www.heine.de/getCBTime?storeId=1',
+		success: function(pJSONResponse){
+			serverTime=new Date(pJSONResponse.LastAccessedTime);
+		    cbNice=true;
+			cbName=$("#cbName").val();
+			cbSurname=$("#cbSurname").val();
+			cbPhone=$("#cbPhone").val();
+			cbGender=$("#cbGender").val();
+			cbKunu=$("#cbKunu").val();
+			if (cbKunu.length == 0)
+			{
+				cbKunu="unbekannt";
+			}
+			cbTime=parseInt($("#cbTime").val());
+			cbCuMail=$("#cbcumail").val();
+			datum=serverTime;
+			stunden=parseInt(datum.getHours());
+			minuten=parseInt(datum.getMinutes());
+			minuten+=cbTime;
+			if (minuten > 59)
+			{
+			   if (stunden!=24)
+			   stunden+=1;
+			   else
+			   stunden=1;
+			   minuten-=60;
+			}
+			if (stunden < 10)
+			{
+			   stunden="0"+stunden;
+			}
+			if (minuten < 10)
+			{
+			   minuten="0"+minuten;
+			}
+			cbDay=datum.getDate();
+			if (cbDay < 10)
+			{
+			   cbDay="0"+cbDay;
+			}
+			cbTime=stunden+":"+minuten;
+			cbMonth=(parseInt(datum.getMonth()))+1;
+			if (cbMonth < 10)
+			{
+			   cbMonth="0"+cbMonth;
+			}
+			cbDate=cbDay+"."+cbMonth+"."+datum.getFullYear();
+			if (cbName.length == 0 || cbName.search(/^[a-zA-Z]/) < 0)
+			{
+			    $("#cbName").addClass("input_error");
+			    cbNice=false;
+			}
+			else
+			{
+			    $("#cbName").removeClass("input_error");
+			}
+			if (cbSurname.length == 0 || cbSurname.search(/^[a-zA-Z]/) < 0)
+			{
+			    $("#cbSurname").addClass("input_error");
+			    cbNice=false;
+			}
+			else
+			{
+			    $("#cbSurname").removeClass("input_error");
+			}
+			if (cbPhone.length == 0 || cbPhone.search(/^[0-9]/) < 0)
+			{
+			    $("#cbPhone").addClass("input_error");
+			    cbNice=false;
+			}
+			else
+			{
+			    $("#cbPhone").removeClass("input_error");
+			}
+			if (cbGender.length == 0)
+			{
+			    $("#cbGender").addClass("input_error");
+			    cbNice=false;
+			}
+			else
+			{
+			    $("#cbGender").removeClass("input_error");
+			}
+		
+			if (cbNice==true)
+			{
+			   var cbmessage="Kundennummer: "+cbKunu+"\nKundenname: "+cbGender+" "+cbSurname+" "+cbName;
+			   cbmessage+="\nRückruf-Datum: "+cbDate;
+			   cbmessage+="\nRückruf-Zeitfenster: "+cbTime;
+			   cbmessage+="\nRückruf-Telefonnummer: "+cbPhone;
+			   $("div#cbFormButton.cbFormButton a#cbEmailSubmit.go span.btGo").html('Bitte warten');
+			   $("div#cbFormButton.cbFormButton a#cbEmailSubmit.go span.btGo").click(function(){return false;});
+			   var cbmailurl=encodeURI(cbSendMailUrl+"&msgtype=CallBackService&message="+cbmessage+"&subject=Callback von Heine");
+			   $.ajax({
+			           async: true,
+			           cache: false,
+			           dataType: "html",
+			           url: cbmailurl,
+			           type: "GET",
+			           success: function() {
+			           $("#cbLayer").html('<div class="cbsHeader">Vielen Dank f&uuml;r Ihre Anfrage!</div><div class="cbsText">Gerne rufen wir Sie zum angegebenen Zeitpunkt zur&uuml;ck.</div><div class="cbsButton"><a class="go"><span class="btGo" id="cbsClose">Schlie&szlig;en</span></a></div>');
+			           $(".cbsButton").click(
+						function()
+						{
+						    closeCBLayer();
+						}
+						);
+			            },
+			            error: function(){
+			                 econdaConsole("Callback-Formular: Fehler beim Absenden.");
+			                 }
+			            });
+			}
+			else
+			{
+
+			   $("#cbErrorText").show();
+			}
+		} 
+	});
+}
+);
+});

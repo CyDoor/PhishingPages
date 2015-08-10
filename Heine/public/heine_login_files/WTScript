@@ -1,0 +1,71 @@
+
+wtCountryLabel="default";
+
+wtCountryLabel="EC0801";
+wtSite='heine.de'
+
+wtOnClick=function(evtype){
+	if(typeof(wtDebug)==='object')
+	{
+		var list=$('#wtDL ul');
+		var wtdo=new wtDebug();
+		wtdo.addHeadLine('-- WEBTRENDS EVENT DEBUGGING --',list);
+	}
+	switch(evtype)
+	{
+		case 'searchClick':
+		dcsMultiTrack('WT.z_searchResultClick','1','WT.dl', '99');
+		if(typeof(wtDebug)==='object')
+		wtdo.addLine('WT.z_searchResultClick','1',list)	
+		break;
+	}
+	if(typeof(wtDebug)==='object')
+	wtdo.addLine('WT.dl','99',list)
+	
+}
+
+wtGetRating=function(){
+	var ratingText=String();
+	if($('.BVImgOrSprite img').length)
+	{
+		switch($('.BVImgOrSprite img').attr('alt'))
+		{
+			case "0 von 5":
+			case "1 von 5":
+			case "2 von 5":return 'Low';
+			case "3 von 5":
+			case "4 von 5":return 'Medium';
+			case "5 von 5":return 'High';
+			default:return 'None';
+		}
+	}
+	return 'None';
+}
+
+if (wtCountryLabel!='default')
+{
+
+	window.webtrendsAsyncInit = function () {
+	dcs = new Webtrends.dcs().init({
+	dcsid: "dcsb6ug4i000008ybqtxmahby_5u5o",
+	domain: "statse.webtrendslive.com",
+	timezone: 1,
+	i18n: true,
+	fpcdom:'.'+wtSite,
+	plugins: {
+	sha1:{src:"/HeineStorefrontAssetStore/20150710.035724/js/tracking/webtrends/sha1.js"},
+	stripEmails:{src: "/HeineStorefrontAssetStore/20150710.035724/js/tracking/webtrends/stripEmails.js"},
+	replicate: { src: "//s.webtrends.com/js/webtrends.replicate.js", servers: [{
+	domain: "scs.webtrends.com", dcsid: "dcsb6ug4i000008ybqtxmahby_5u5o"
+	}]}
+	}
+	});
+	};
+	(function (){
+	var s=document.createElement("script"); s.async=true; s.src="/HeineStorefrontAssetStore/20150710.035724/js/tracking/webtrends/webtrends.js";
+	var s2=document.getElementsByTagName("script")[0]; s2.parentNode.insertBefore(s,s2);
+	}());
+
+}
+
+

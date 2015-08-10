@@ -1,0 +1,72 @@
+#header-search {
+    position: relative;
+    width: 149px;
+    z-index: 20;
+    margin-top: 34px;
+    float: right;
+    clear: right;
+    background-color: #f9f9f8;
+    border-top: 1px solid #e7e3e3;
+    border-right: 1px solid #f1f0f1;
+    border-left: 1px solid #f1f0f1;
+}
+
+.saf.mobile #header-search,
+.ie7 #header-search {
+    padding-top: 1px;
+}
+
+#header-search p {
+    width: 139px;
+    cursor: pointer;
+}
+
+#header-search input {
+    text-align: left;
+    background-color: transparent;
+    color: #8E8682;
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 108px;
+    padding: 7px 0 6px 10px;
+}
+
+.saf.mobile #header-search input {
+    height: 20px;
+    line-height: 12px;
+}
+
+#searchwarning {
+    position: absolute;
+    top: 120px;
+    z-index: 500;
+    padding: 5px 10px;
+    color: #000;
+    font-size: 12px;
+    background-color: #fffffe;
+    display: none;
+}
+
+#header-search p {
+    background: url(http://pics3.esprit.de/Shop/images/default/global/search-icon.png) no-repeat right center;
+}
+
+#searchloadinglayer {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 500px;
+    z-index: 25;
+}
+
+.searchloadinglayer-icon {
+    padding: 0;
+    text-align: center;
+}
+
+.searchloadinglayer-text {
+    padding-top: 20px;
+    font-size: 16px;
+    color: #8E8682;
+    text-align: center;
+}

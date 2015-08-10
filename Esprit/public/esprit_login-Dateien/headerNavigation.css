@@ -1,0 +1,238 @@
+#header-menu {
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    width: 100%;
+}
+
+#header-menu div.mainmenu {
+    width: 100%;
+    height: 32px;
+    text-align: center;
+}
+
+#header-menu .mainmenu li.level-1 {
+    display: inline-block;
+    height: 26px;
+    padding: 0 15px 6px 15px;
+    font-size: 14px;
+    zoom: 1;
+    *display: inline;
+}
+
+#header-menu .mainmenu li.level-1 > a {
+    display: block;
+    text-transform: uppercase;
+    height: 25px;
+    background-color: #fff;
+    padding: 7px 0 0;
+    color: #8E8682;
+}
+
+#header-menu .mainmenu li.level-1 > a.active,
+#header-menu .mainmenu li.level-1 > a:hover,
+#header-menu .mainmenu li.level-1.active > a{
+    border-bottom: 1px solid #c4122f;
+    color: #363636;
+}
+
+#header-menu .mainmenu ul.topnavi-level-2 {
+    visibility: hidden;
+    top: 52px;
+    left: 0;
+}
+
+#flyout {
+    position: absolute;
+    padding-top: 22px;
+    z-index: 3600;
+}
+
+ul.topnavi-level-2.flyout {
+    position: absolute;
+    padding: 0 30px 0 30px;
+    z-index: 900;
+    background-color: #F4F4F2;
+    text-align: left;
+}
+
+.flyout a {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", "Helvetica Neue", "Droid Sans", sans;
+    font-style: normal;
+    font-size: 12px;
+    display: block;
+    height: auto;
+    color: #8E8682;
+}
+
+.flyout li.level-2 {
+    width: 155px;
+    float: left;
+    border-right: 1px solid #D4D0CC;
+    margin-right: 15px;
+    padding: 16px 15px 20px 0;
+}
+
+.flyout li.level-2.topnavi-lastchild {
+    border-right: 1px solid #F4F4F2;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.flyout li.level-2 .navilabel {
+    position: relative;
+    margin: 1px 2px 0 0;
+}
+
+.flyout li.level-2 > a {
+    line-height: 16px;
+    border-bottom: 1px solid #D4D0CC;
+    padding-bottom: 9px;
+    color: #363636;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.flyout li.level-2 > ul.splitlist {
+    float: left;
+}
+
+.flyout li.level-2 > ul.splitlist-rightcolumn {
+    margin-left: 20px;
+}
+
+.flyout li.level-3 > a {
+    line-height: 16px;
+    margin: 0 0 5px 0;
+}
+
+.flyout li.level-3.topnavi-lastchild {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    position: relative;
+}
+
+.section-no-11 {
+    z-index: 50;
+}
+
+.section-no-10 {
+    z-index: 100;
+}
+
+.section-no-9 {
+    z-index: 150;
+}
+
+.section-no-8 {
+    z-index: 200;
+}
+
+.section-no-7 {
+    z-index: 250;
+}
+
+.section-no-6 {
+    z-index: 300;
+}
+
+.section-no-5 {
+    z-index: 350;
+}
+
+.section-no-4 {
+    z-index: 400;
+}
+
+.section-no-3 {
+    z-index: 450;
+}
+
+.section-no-2 {
+    z-index: 500;
+}
+
+.section-no-1 {
+    z-index: 550;
+}
+
+/* SectionTitles for STORIES */
+.section-title {
+    background: #DAD5D3;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    margin: -16px -15px 16px -16px;
+    padding: 16px 15px 18px 16px;
+    text-transform: uppercase;
+    line-height: 16px;
+    font-size: 14px;
+    font-style: normal;
+    color: #363636;
+    white-space: nowrap;
+}
+
+.section-title.first-section {
+    margin-left: -31px;
+    padding-left: 31px;
+}
+
+.section-title.topnavi-lastchild {
+    margin-right: -31px;
+}
+
+.section-title.empty {
+    border-left: 1px solid #DAD5D3;
+}
+
+/** Xmas-Flyout  2014 **/
+.parent-menu-12590 {
+    background-color: #f2e9d6 !important;
+}
+
+.parent-menu-12590 li.level-2.topnavi-lastchild {
+    border-right: 1px solid #f2e9d6;
+}
+
+#header-menu .mainmenu #menu-12590 {
+    color: #c5985c;
+    border-bottom-color: #c5985c;
+}
+
+#header-menu .mainmenu #menu-12590 img {
+    float: right;
+    margin-left: 6px;
+    margin-top: 3px;
+}
+
+.parent-menu-12590 li.level-2 {
+    width: 128px;
+}
+
+.parent-menu-12590 li.level-2:first-child {
+    width: 401px !important;
+}
+
+.parent-menu-12590 li.level-2.topnavi-lastchild {
+    width: 149px !important;
+}
+
+.parent-menu-12590 > li.level-2:first-child ul li {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.parent-menu-12590 > li.level-2:first-child ul li.topnavi-lastchild {
+    margin-right: 0;
+}
+
+.parent-menu-12590 li.level-2 {
+    padding: 20px 15px 25px 0;
+}
+
+.parent-menu-12590 li.level-2 > a,
+.parent-menu-12590 li.level-2 {
+    border-color: #e1ccaf;
+}

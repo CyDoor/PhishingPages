@@ -1,0 +1,38 @@
+
+var lastAccessedTime=1437476655701;
+try
+{
+    var serverTime=new Date(lastAccessedTime);
+    actualhour=serverTime.getHours();
+}
+catch(e)
+{
+    econdaConsole(e);
+}
+
+$(document).ready(function(){
+	if (typeof(actualhour)=="number" && (actualhour >= 9 && actualhour < 20))
+	{
+	    try
+	    {		
+	        $("#livechat").show();
+	        
+	    }
+	    catch(e)
+	    {
+	        econdaConsole(e);
+	    }
+	    try
+	    {
+	    	
+	           $("#livechatSticky").show();
+	        
+	           if (!getECookie('noSticky') && e_domain === '1')
+	           $("#stickyLayer").show();
+	    }
+	    catch(e)
+	    {
+	        econdaConsole(e);
+	    }
+	}
+});

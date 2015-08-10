@@ -1,0 +1,328 @@
+/* message window */
+.message_window_content
+{
+	display:			none;
+	width: 				282px;
+	height: 			260px;
+	padding:			0px;
+	font-size:			13px;
+	-moz-box-shadow: 	2px 2px 4px #A0A0A0;
+	-webkit-box-shadow: 2px 2px 4px #A0A0A0;
+	box-shadow: 		2px 2px 4px #A0A0A0;
+	/* For IE 8 */
+	-ms-filter: 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474	')";
+	/* For IE 5.5 - 7 */
+	filter: 			progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474');
+	z-index:			998;
+	background-color:   #FFFFFF;
+}
+
+.message_window_content_context
+{
+	width: 				640px;
+	height: 			380px;
+}
+
+.message_window_caption
+{
+	padding: 			0px 0px 11px 25px;
+	color:				#000;
+	font-weight:		bold;
+	text-transform:		uppercase;
+}
+
+.message_window_caption_big
+{
+	padding: 			0px 0px 11px 46px;
+	color:				#000;
+	font-size:			20px;
+	text-transform:		uppercase;
+}
+
+.message_window_context
+{
+	padding-right:		25px;
+	padding-left:		25px;
+	position:			absolute;
+	top:				50%;
+	height:				10em;
+	margin-top:			-11em;
+}
+
+.message_window_context_title
+{
+	font-size: 			20px;
+	text-transform: 	uppercase;
+	color: 				#000;
+}
+
+#message_window_context_text
+{
+	padding-bottom:		20px;
+	margin-top: 		25px
+}
+
+.message_window_close
+{
+	cursor:				pointer;
+	position:			absolute;
+	top:				8px;
+	right:				8px;
+	line-height:		13px;
+	font-size:			12px;
+	text-transform: 	uppercase;
+}
+
+.message_window_close img
+{
+	padding-left: 		6px;
+}
+
+.message_window_message
+{
+	line-height: 		17px;
+	color:				#000000;
+	padding: 			0px 0px 0px 25px !important;
+	width:				193px;
+}
+
+.message_window_buttons
+{
+	display:			none;
+	width: 				100%;
+	padding: 			15px 0px 0px 25px;
+}
+
+.message_window_button
+{
+	min-width: 			66px;
+	height:				27px;
+	display:			none;
+	cursor:				pointer;
+	color:				#000000;
+	background-color:	#ccc2bc;
+	font-size:			16px;
+	margin-right: 		7px;
+	padding:			0px 7px 0px 7px;
+	width: 				auto;
+	overflow: 			visible;
+}
+
+.message_window_nose_left
+{
+	display:			none;
+	position:			absolute;
+	top:				15px;
+}
+
+.message_window_nose_right
+{
+	display:			none;
+	position:			absolute;
+	top:				15px;
+}
+
+.message_window_nose_bottom
+{
+	display:			none;
+	position:			absolute;
+	left:				0px;
+}
+
+/* message window basket */
+
+.message_window_basket_content
+{
+	display:			none;
+	width: 				262px;
+	height: 			149px;
+	padding:			0px;
+	font-size:			13px;
+	-moz-box-shadow: 	2px 2px 4px #A0A0A0;
+	-webkit-box-shadow: 2px 2px 4px #A0A0A0;
+	box-shadow: 		2px 2px 4px #A0A0A0;
+	/* For IE 8 */
+	-ms-filter: 		"progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474	')";
+	/* For IE 5.5 - 7 */
+	filter: 			progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474');
+	z-index:			998;
+	background-color:   #FFFFFF;
+}
+
+.message_window_basket_caption
+{
+	padding-top:		7px;
+	text-align: 		center;
+	color:				#000;
+	height:				14px;
+	line-height: 		14px;
+}
+
+.message_window_basket_message
+{
+	line-height: 		17px;
+	text-align: 		center;
+	color:				#000000;
+	padding: 			13px 20px 0px 20px !important;
+}
+
+.message_window_basket_buttons
+{
+	position: 			absolute !important;
+	bottom: 			20px !important;
+	display:			none;
+	width: 				100%;
+}
+
+.message_window_basket_button
+{
+	min-width: 			66px;
+	height:				24px;
+	display:			none;
+	cursor:				pointer;
+	color:				#000000;
+	background-color:	#ccc2bc;
+	bottom: 			0px;
+	padding: 			0px 5px 0px 5px;
+	width: 				auto;
+	overflow: 			visible;
+}
+
+.message_window_basket_button.disable
+{
+    color:				#545454;
+    background-color:	#dddddd;
+}
+
+.message_window_basket_button[name="ok"] {
+	float:				left;
+	margin-left: 		30px;
+}
+
+.message_window_basket_button[name="cancel"] {
+	float:				right;
+	margin-right: 		25px;
+}
+
+/* message layer */
+#container_layer .message_layer_fader
+{
+	display:			none;
+	position:			absolute;
+	width:				100%;
+	height:				100%;
+	top:				0px;
+	left:				0px;
+	background-color:	#000000;
+	opacity:			0.50;
+        filter:alpha(opacity=50);
+	z-index:			900;
+}
+
+#delivery_partner_frame
+{
+	overflow:			hidden;
+}
+
+#addressbook_frame
+{
+	overflow:			hidden;
+}
+
+#container_layer #message_layer_content
+{
+	display:			none;
+	padding:			0px;
+	background-color:	#FFFFFF;
+	border:				2px solid #000000;
+	z-index:			998;
+}
+
+#container_layer #message_layer_content #cap
+{
+	padding:			2px;
+	padding-left:		5px;
+	padding-right:		20px;
+	color:				#FFFFFF;
+	background-color:	#000000;
+	font-size:			11px;
+	line-height:		15px;
+}
+
+#container_layer #message_layer_content #close
+{
+	cursor:				pointer;
+	position:			absolute;
+	top:				0px;
+	right:				0px;
+}
+
+#container_layer #message_layer_content #msg
+{
+	color:				#666666;
+	background-color:	#FFFFFF;
+	clear:				right;
+}
+
+#container_layer #message_layer_content #btn
+{
+	display:			none;
+	padding-left:		11px;
+	margin-bottom:		5px;
+	text-align:			center;
+}
+
+#container_layer #message_layer_content #btn button
+{
+	display:			none;
+	cursor:				pointer;
+}
+
+#container_layer #inlayer_banner
+{
+	cursor:				pointer;
+	vertical-align:		bottom;
+}
+
+#container_layer #nose_left
+{
+	display:			none;
+	position:			absolute;
+	top:				15px;
+}
+
+#container_layer #nose_right
+{
+	display:			none;
+	position:			absolute;
+	top:				15px;
+}
+
+#container_layer #nose_bottom
+{
+	display:			none;
+	position:			absolute;
+	left:				0px;
+}
+
+/* content settings */
+
+.messagelayer_default
+{
+	position:			absolute;
+}
+
+.messagelayer_defaulterror
+{
+	min-width:			250px;
+	position:			absolute;
+	width:				250px;
+	height:				auto;
+}
+
+.maxBasketLayer
+{
+	font-size: 			12px;
+	line-height: 		16px;
+	color: 				#363636;
+}

@@ -1,0 +1,37 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* wishlist */
+
+#header-wishlist {
+    float: right;
+    position: relative;
+    z-index: 10;
+    margin: 11px 0 0 10px;
+    padding: 0 0 0 15px;
+    font-size: 11px;
+    line-height: 18px;
+    color: #8e8682;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_wishlist.png') 0 5px no-repeat;
+    display: none;
+}
+
+#header-wishlist a {
+    color: inherit;
+}
+
+.wysiwyg #header-wishlist {
+    display: block;
+    margin: 0;
+    padding: 0 2px 0 15px;
+}
+
+body.wysiwyg {
+    background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#0000000,endColorstr=#0000000);
+    zoom: 1;
+}
+
+body.wysiwyg:nth-child(n) {
+    filter:none;
+}

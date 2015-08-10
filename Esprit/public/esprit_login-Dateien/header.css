@@ -1,0 +1,8 @@
+#header {
+    position: relative;
+    margin: 0 0 30px 0;
+    height: 154px;
+    width: 960px;
+    z-index: 1550;
+    border-bottom: 1px solid #b5aca7;
+}

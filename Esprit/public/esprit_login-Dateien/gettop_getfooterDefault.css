@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+#header,
+#footer,
+#flyout {
+    line-height: 1.5;
+}
+
+#header div.clear, #header span.clear,
+#footer div.clear, #footer span.clear,
+#flyout div.clear, #flyout span.clear {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    clear: both;
+    display: block;
+    float: none;
+    font-size: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: static;
+    visibility: hidden;
+    width: 0;
+}
+
+#header ol, #header ul,
+#footer ol, #footer ul
+#flyout ol, #flyout ul {
+    list-style: none outside none;
+}
+
+#header .shadow, #footer .shadow, #flyout .shadow {
+    -moz-box-shadow: 2px 2px 4px #A0A0A0;
+    -webkit-box-shadow: 2px 2px 4px #A0A0A0;
+    box-shadow: 2px 2px 4px #A0A0A0;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474	')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#747474');
+}
+
+#header img, #footer img, #flyout img {
+    vertical-align: top;
+}
+
+#header a, #footer a, #flyout a {
+    text-decoration: none;
+}
+
+#header a:active, #footer a:active {
+    color: inherit;
+}
+
+#header a:hover, #footer a:hover, a:hover, #header a:link, #footer a:link, #header a:visited, #footer a:visited {
+    color: inherit;
+}
+
+#header input, #footer input, #flyout input {
+    border: 0 none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+#header button, #footer button, #flyout button {
+    border: 0 none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+/* Font Classes
+--------------------------------------------------------------------------------*/
+#header .font-serif, #footer .font-serif, #flyout .font-serif {
+    font-family: Times New Roman, serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+#header .font-serif-italic, #footer .font-serif-italic, #flyout .font-serif-italic {
+    font-family: Times New Roman, serif;
+    font-style: italic;
+}
+
+#header .font-serif-bold, #footer .font-serif-bold, #flyout .font-serif-bold {
+    font-family: Times New Roman, serif;
+    font-weight: bold;
+}
+
+#header .font-sansserif, #footer .font-sansserif, #flyout .font-sansserif {
+    font-family: Arial, sans-serif;
+}
+
+#header .font-georgia, #footer .font-georgia, #flyout .font-georgia, #flyout.font-georgia {
+    font-family: "Georgia", "Droid Serif", serif;
+}
+
+#header .font-georgia-italic, #footer .font-georgia-italic, #flyout .font-georgia-italic, #flyout.font-georgia-italic {
+    font-family: "Georgia", "Droid Serif", serif;
+    font-style: italic;
+}
+
+#header .font-georgia-bold, #footer .font-georgia-bold, #flyout .font-georgia-bold, #flyout.font-georgia-bold {
+    font-family: "Georgia", "Droid Serif", serif;
+    font-weight: bold;
+}
+
+#header .font-scribbled, #footer .font-scribbled, #flyout .font-scribbled {
+    font-family: "SameSameButDifferentRegular";
+}
+
+#header .font-joe, #footer .font-joe, #flyout .font-joe {
+    font-family: "DearJoeFour";
+}
+
+#header-wishlist, #header-storefinder, .header-seperation-first {
+    display: none !important;
+}

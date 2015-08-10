@@ -1,0 +1,551 @@
+#footer,
+#benefitbar {
+    background-color: #F0F0ED;
+    color: #8E8682;
+}
+
+.ie7 #benefitbar {
+    position: static;
+}
+
+#footer .hr,
+#newsletter-promo .hr {
+    opacity: 0.5;
+}
+
+.center-content {
+    text-align: center;
+    font-size: 0; /* remove space between inline-block elements */
+}
+
+.center-content form {
+    display: inline-block;
+}
+
+.newsletter_footer_text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+}
+
+.newsletter_footer_text:last-child {
+    font-weight: bold;
+    color: #ba0c2f;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+}
+
+.newsletter_heading {
+    display: inline-block;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    font-size: 14px;
+    color: #8c847f;
+    text-transform: uppercase;
+    text-align: left;
+    margin-top: 27px;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+#newsletter_heading_en {
+    display: inline-block;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    font-size: 12px;
+    color: #8c847f;
+    text-transform: uppercase;
+    text-align: left;
+    margin-top: 27px;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+#newsletter_heading_en span {
+    font-size: 12px;
+}
+
+#newsletter-promo .newsletter-textfield {
+    float: left;
+    margin-left: 10px;
+}
+
+#newsletter-promo-women #newsletter-promo-men a {
+    color: #fff;
+}
+
+#newsletter-promo input {
+    width: 213px;
+    padding: 7px 9px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    line-height: 17px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #D1D1D1;
+    border: 1px solid #cbc5c1;
+}
+
+#newsletter_heading_en ~ form div input,
+#newsletter_heading_es ~ form div input {
+    width: 194px;
+}
+
+#newsletter-promo input:focus {
+    color: #363636;
+}
+
+.newsletter-button-men,
+.newsletter-button-women {
+    width: 83px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 13px;
+    line-height: 17px;
+    text-align: center;
+    color: #fff;
+    background-color: #99918d;
+    float: left;
+    cursor: pointer;
+    padding: 7px 15px 7px 15px;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+#nele_button_en,
+#nele_button_es {
+    background-color: #99918d;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    line-height: 17px;
+    padding: 7px 15px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 66px;
+    margin-top: 20px;
+}
+
+#newsletter-promo-languages-dropdown {
+    background-position: 120px center;
+    background-image: url("http://pics3.esprit.de/Shop/images/default/global/footer/arrow_down.gif");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-color: rgba(0, 0, 0, 0);
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 140px;
+    margin-top: 20px;
+    z-index: 310;
+}
+
+#newsletter-promo-languages-dropdown-headline {
+    height: 17px;
+    line-height: 17px;
+    font-size: 13px;
+    color: #D1D1D1;
+    border: 1px solid #cbc5c1;
+    padding: 7px 9px;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    cursor: pointer;
+}
+
+#newsletter-promo-dropdown-languages-items {
+    position: absolute;
+    width: 138px;
+    border: 1px solid #cbc5c1;
+    background: #fff;
+    display: none;
+    color: #363636;
+    line-height: 17px;
+    font-size: 13px;
+}
+
+#newsletter-promo-dropdown-languages-items .newsletter-promo-dropdown-languages-item:hover {
+    background-color: #dad5d3;
+}
+
+#newsletter-promo-dropdown-languages-items .newsletter-promo-dropdown-languages-item {
+    font-size: 13px;
+    line-height: 17px;
+    padding: 3px 0 3px 31px;
+    background-repeat: no-repeat;
+    background-position: 9px 50%;
+    cursor: pointer;
+    list-style: none;
+    margin-left: 0;
+    text-align: left;
+}
+
+#benefitbar {
+    z-index: 300;
+    font-size: 12px;
+    padding: 14px 0;
+    height: 16px;
+}
+
+#benefitbar-headers {
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+    padding: 0;
+}
+
+#benefitbar-headers li {
+    vertical-align: top;
+    display: inline-block;
+    zoom: 1;
+    font-size: 12px;
+    Letter-spacing: 0.06em;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#benefitbar-headers:after {
+    content: '';
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+#benefitbar-headers-detail {
+    background-color: #fff;
+    position: absolute;
+    display: none;
+    width: 960px;
+    height: 250px;
+}
+
+.dropdown_headline {
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.dropdown_text_p {
+    margin: 6px 0;
+    font-size: 10px;
+}
+
+.footer_chat {
+    cursor: hand;
+}
+
+.dropdown_text_bold {
+    font-weight: bold;
+}
+
+.dropdown_img_container_open {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #DCDCDC;
+    color: #5E5E5E;
+    cursor: default;
+    display: none;
+    line-height: 14px;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    width: 320px;
+    z-index: 3000;
+}
+
+#footer {
+    z-index: 100;
+}
+
+.ie7 #footer {
+    height: 100%;
+}
+
+/* ------------------------------------------------------ */
+/* Footer Menu */
+/* ------------------------------------------------------ */
+#footer-menu {
+    margin-bottom: 31px;
+    font-size: 0;
+    white-space: nowrap;
+}
+
+#footer-menu dl {
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: 0.02em;
+    width: 202px;
+    text-align: left;
+    color: #8E8682;
+    padding-left: 28px;
+}
+
+#footer-menu dl:first-child {
+    margin-left: 20px;
+}
+
+#footer-menu dl.last {
+    margin-right: 20px;
+}
+
+.ie7 #footer-menu dl {
+    display: inline;
+    width: 155px;
+}
+
+#footer-menu dt {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-weight: bold;
+}
+
+#footer-menu dd {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 3px 0;
+    font-family: Lucida Sans Unicode, Lucida Grande, Helvetica Neue, Droid Sans, sans;
+}
+
+#footer-menu dd img {
+    margin-right: 4px;
+}
+
+#footer-menu dd a {
+    color: #8E8682;
+}
+
+/* ------------------------------------------------------ */
+/* Footer Iconbar */
+/* ------------------------------------------------------ */
+
+#footer-iconbar {
+    padding-bottom: 16px;
+    font-size: 12px;
+}
+
+#footer-iconbar span.iconbar-shipping {
+    float: right;
+}
+
+#footer-iconbar span.iconbar-payment-text,
+#footer-iconbar span.iconbar-shipping-text {
+    font-size: 12px;
+    line-height: 16px;
+    font-family: Lucida Sans Unicode, Lucida Grande, Helvetica Neue, Droid Sans, sans;
+    margin: 2px 16px 0 0;
+    line-height: 16px;
+    letter-spacing: 0;
+}
+
+#footer-iconbar span.iconbar-languagechooser {
+    float: left;
+    margin-bottom: 20px;
+    color: #8E8682;
+}
+
+#footer-iconbar span.iconbar-languagechooser-label,
+#footer-iconbar span.iconbar-languagechooser-delimiter,
+#footer-iconbar span.iconbar-languagechooser-lang,
+#footer-iconbar span.iconbar-languagechooser-lang form {
+    float: left;
+}
+
+#footer-iconbar span.iconbar-languagechooser a {
+    color: #8E8682;
+}
+
+#footer-iconbar span.iconbar-languagechooser-lang.active {
+    font-weight: bold;
+}
+
+#footer-iconbar span.iconbar-payment.right,
+#footer-iconbar span.iconbar-shipping.right {
+    padding-right: 0;
+    padding-left: 25px;
+    float: right;
+}
+
+#footer span.ssl-icon-text {
+    font-size: 12px;
+    line-height: 50px;
+}
+
+#footer span.iconbar-security {
+    position: relative;
+    display: inline-block;
+    z-index: 3000;
+}
+
+#footer span.iconbar-security img {
+    margin: 8px 8px 0 0;
+    cursor: pointer;
+}
+
+#footer span.iconbar-security span.iconbar-mouseover {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 310px;
+    display: none;
+    color: #5E5E5E;
+    font-size: 10px;
+    box-shadow: 2px 2px 1px 0 #888;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 3006;
+}
+
+#footer span.iconbar-security:hover span.iconbar-mouseover {
+    display: block;
+}
+
+#footer-iconbar a {
+    padding-right: 8px;
+}
+
+#footer-iconbar a:last-child {
+    padding-right: 0;
+}
+
+#benefitbar-layer {
+    letter-spacing: 0.01em;
+}
+
+#benefitbar-layer a {
+    font-size: 10px;
+    color: #5E5E5E;
+}
+
+#dropdown_retoure_open_find td {
+    width: 150px;
+}
+
+#dropdown_invoice_open_find td {
+    padding: 6px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 10px;
+}
+
+#dropdown_invoice_open_find td img {
+    float: left;
+}
+
+#benefitbar-layer li {
+    list-style-type: disc;
+    margin-left: 12px;
+}
+
+#footer-socialmedia {
+    position: relative;
+    padding: 22px 0 31px 0;
+    text-align: center;
+}
+
+#footer-socialmedia li img {
+    cursor: pointer;
+}
+
+#footer-socialmedia .socialmedia-icon {
+    cursor: pointer;
+    margin-right: 14px;
+    display: inline;
+}
+
+.socialmedia-text {
+    margin-right: 14px;
+    display: inline;
+    line-height: 30px;
+    font-size: 14px;
+    color: #8e8682;
+    font-style: italic;
+}
+
+#footer-copyright {
+    display: inline;
+    font-style: italic;
+    float: right;
+    line-height: 16px;
+    margin-top: 20px;
+}
+
+.ie7 #footer-copyright {
+    font-style: normal;
+}
+
+#footer-text {
+    border-bottom: 1px solid #B5ACA7;
+    color: #989898;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#footer-text p {
+    font-size: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+#footer-text h1 {
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: none;
+    margin-top: 6px;
+    margin-bottom: 6px;
+
+}
+
+#footer-text h2 {
+    font-size: 14px;
+    font-weight: normal;
+    text-transform: none;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+#footer-backtomobile {
+    background-color: white;
+    padding: 10px 0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 40px;
+    height: 58px;
+    margin-top: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+#noscript div div.logo_hide {
+    background-color: #F0F0ED;
+    position: relative;
+    width: 960px;
+    margin: auto;
+    z-index: 5000;
+    font: Arial;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+#noscript div div .logo_hide_strong {
+    font-weight: bolder;
+}
+
+#noscript {
+    width: 960px;
+    margin: auto;
+    z-index: 4000;
+}
+
+#noscript div {
+    z-index: 4600;
+    width: 960px;
+    --margin: auto;
+    top: 15px;
+    position: absolute;
+}

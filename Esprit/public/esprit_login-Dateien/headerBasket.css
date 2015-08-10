@@ -1,0 +1,369 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* basket */
+#nws_ws_container_basket {
+    float: right;
+    position: relative;
+    z-index: 520;
+    margin: 11px 0 0 10px;
+    padding: 0 0 0 15px;
+    font-size: 11px;
+    line-height: 18px;
+    color: #000;
+    font-weight: bold;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_shopping_bag.png') 0 2px no-repeat;
+}
+
+.header_seperation_basket {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.nws_ws_basket_items_price {
+    display: none;
+}
+
+.wysiwyg #nws_ws_container_basket {
+    color: #8e8682;
+    font-weight: normal;
+}
+
+.wysiwyg #nws_ws_container_basket {
+    margin: 2px 0 0 0;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_shopping-bag.png') 0 2px no-repeat;
+}
+
+body.wysiwyg {
+    background: rgb(0, 0, 0);
+    background: transparent \9;
+    background: rgba(0, 0, 0, 0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#000, endColorstr=#000);
+    zoom: 1;
+}
+
+body.wysiwyg:nth-child(n) {
+    filter: none;
+}
+
+#nws_ws_container_basket > a {
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+#nws_ws_container_basket > a > em {
+    display: none;
+    font-style: normal !important;
+}
+
+#nws_ws_container_basket > a > em:before {
+    content: "("
+}
+
+#nws_ws_container_basket > a > em:after {
+    content: ")"
+}
+
+#nws_ws_container_basket h2 {
+    text-transform: uppercase;
+    padding: 5px 0 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#header-basket-list {
+    width: 210px;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    padding: 15px;
+    display: none;
+    z-index: 500;
+    text-align: center;
+}
+
+#header-basket-list ul {
+    margin-bottom: 10px;
+}
+
+#header-basket-list ul li {
+    border-bottom: 1px solid #ccc2bc;
+    padding: 10px 0;
+}
+
+#header-basket-list ul li.last {
+    border-bottom-width: 2px;
+}
+
+#header-basket-list img {
+    float: left;
+    width: 40px;
+    height: 60px;
+    display: block;
+}
+
+#header-basket-list ul li p {
+    margin-left: 50px;
+    font-size: 12px;
+    text-transform: none;
+    text-align: left;
+}
+
+#header-basket-list ul li p.basket-list-headline {
+    font-weight: bold;
+    line-height: 14px;
+}
+
+#header-basket-list ul li p.basket-list-price {
+    font-weight: bold;
+    position: relative;
+    float: right;
+    bottom: 16px;
+}
+
+#header-basket-list-totalprice p {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#header-basket-list-showbasket {
+    text-transform: uppercase;
+    width: 210px;
+    height: 36px;
+    font-weight: bold;
+}
+
+#basketPreviewLayer {
+    position: absolute;
+    right: 0;
+    width: 310px;
+    min-height: 100px;
+    padding: 10px 0;
+    color: #8E8682;
+    background-color: #fff;
+}
+
+.resWide #basketPreviewLayer {
+    left: 969px;
+}
+
+#basketPreviewLayer.shadow {
+    -moz-box-shadow: 1px 1px 1px 2px #888;
+    -webkit-box-shadow: 1px 1px 1px 2px #888;
+    box-shadow: 2px 2px 1px 0px #888888;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color='#888',direction=135,strength=3)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#888', direction=135, strength=3);
+    border-top: 1px solid #EBEBEB;
+    border-left: 1px solid #EBEBEB;
+}
+
+#basketPreviewLayer .basketPreviewLoaderImage {
+    position: absolute;
+    top: 45px;
+    left: 104px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* -- Basket PreviewLayer -- */
+
+#basketPreviewLayer {
+    display: none;
+    position: absolute;
+    z-index: 1550;
+}
+
+#basketPreviewLayer .basketLayerBox {
+    clear: left;
+    border-bottom: 1px solid #8e8682;
+}
+
+#basketPreviewLayer .basketLayerClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#basketPreviewLayer .basketLayer_count {
+    font-size: 15px;
+    text-align: center;
+    height: 31px;
+}
+
+#basketPreviewLayer .basketLayer_arrow {
+    text-align: center;
+}
+
+#basketPreviewLayer .basketLayer_arrow img {
+    cursor: pointer;
+}
+
+#basketPreviewLayer .basketLayer_arrow_top {
+    margin: 20px 0 0 0;
+    height: 23px;
+}
+
+#basketPreviewLayer .basketLayer_arrow_bottom {
+    height: 30px;
+    padding: 13px 0 0 0;
+}
+
+#basketPreviewLayer a {
+    color: #7D7D7D;
+}
+
+#basketPreviewLayer .basketLayer_infos .red {
+    color: #AE3232;
+}
+
+#basketPreviewLayer div.basketLayer_image {
+    float: left;
+    margin: 0 20px 13px 0;
+}
+
+#basketPreviewLayer div.basketLayer_image.giftcard {
+    margin: 13px 20px 60px 0;
+}
+
+#basketPreviewLayer .basketLayer_infobox {
+    overflow: hidden;
+    position: relative;
+    height: 168px;
+}
+
+#basketPreviewLayer .basketLayer_scrollbox {
+    position: absolute;
+    width: 310px;
+}
+
+#basketPreviewLayer .basketLayerPosition {
+    clear: left;
+    margin: 0 0 0 19px;
+}
+
+#basketPreviewLayer .basketLayer_infos {
+    padding: 10px 0 0 0;
+    font-size: 12px;
+}
+
+#basketPreviewLayer .arrow-right {
+    background-image: none;
+}
+
+#basketPreviewLayer .basketLayer_infos_placeholder {
+    height: 15px;
+}
+
+#basketPreviewLayer .basketLayer_sum {
+    font-size: 14px;
+    padding: 0 0 0 20px;
+    min-height: 53px;
+    position: relative;
+}
+
+#basketPreviewLayer .basketLayer_vvp {
+    float: left;
+    font-size: 11px;
+}
+
+#basketPreviewLayer .basketLayer_save {
+    clear: left;
+    height: 36px;
+    line-height: 36px;
+    font-size: 11px;
+}
+
+#basketPreviewLayer .basketLayer_save_summary {
+    text-align: right;
+    padding: 0 35px 0 0;
+    position: absolute;
+    margin-top: -27px;
+    right: 20px;
+    font-size: 11px;
+}
+
+#basketPreviewLayer .basketLayer_summary {
+    position: absolute;
+    text-align: right;
+    font-weight: bold;
+    padding: 0 35px 0 0;
+    top: 0;
+    right: 20px;
+}
+
+#basketPreviewLayer .basketLayer_sum_text {
+    margin: 14px 0 0 0;
+    font-weight: bold;
+}
+
+#basketPreviewLayer #basketContinueButton {
+    border: 1px solid #a29a97;
+    background-color: #bfb5b3;
+    height: 35px;
+    width: 251px;
+    margin: 0 0 0 30px;
+}
+
+#basketPreviewLayer #basketContinueButton a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    position: relative;
+    top: 6px;
+}
+
+#basketPreviewLayer .basketLayer_buttons {
+    text-align: center;
+    padding: 20px 0 0 0;
+}
+
+#basketPreviewLayer .basketLayer_buttons button {
+    background-color: #fff;
+    color: #8e8682;
+    text-transform: uppercase;
+    text-decoration: underline;
+    margin: 6px 0 17px 0;
+    font-size: 12px;
+}
+
+#basketPreviewLayer .basketLayer_info_bottom {
+    text-align: center;
+    margin: 15px 0 10px 0;
+}
+
+#basketPreviewLayer .basketLayer_info_bottom img {
+    margin: 5px 0 0 0;
+}
+
+#basketPreviewLayer .basketLayer_colorname {
+    text-transform: lowercase;
+}
+
+#basketPreviewLayer #noPositions {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/*IE7 Hack*/
+
+.ie7 #basketPreviewLayer .basketLayer_sum {
+    min-height: 70px;
+}
+
+.ie7 #basketPreviewLayer #basketContinueButton {
+    margin: 0;
+}
+
+.ie7 #basketPreviewLayer .basketLayer_summary {
+    position: relative;
+    padding: 0 25px 0 0;
+    margin: -38px 0 0 0 !important;
+    clear: left;
+}
+
+.ie7 #basketPreviewLayer .basketLayer_save {
+    margin: 20px 0 0 0;
+}
+
+
+

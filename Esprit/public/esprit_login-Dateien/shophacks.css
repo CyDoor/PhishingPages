@@ -1,0 +1,67 @@
+.wrapper {
+    width: 960px;
+    margin: auto;
+}
+#benefitbar { margin: 40px 0 0 0; }
+
+#newsletter-promo { display: none; }
+
+#newsletter-promo a { font-style: italic; }
+
+.newsletter-textfield input {
+    border: 0;
+    font-family: inherit;
+    box-shadow: none;
+}
+
+#benefitbar-headers li {
+    list-style: none;
+    margin: 0;
+}
+
+/* header
+-----------------------------------------------------------------------*/
+div#header {
+    letter-spacing: 0.01em;
+    z-index: auto;
+}
+
+/* This line is required because the shop Logout button is a button */
+#header #header-mein-login-button {
+    box-shadow: none; text-transform: none;
+    font-family: Georgia, Serif;
+    font-size: 11px;
+}
+
+div.mainmenu ul.flyout { display: none; }
+
+#salutation {font-size: 11px;}
+
+div#footer-container
+{
+	font-family: Georgia, "Times New Roman", Times, serif;
+    letter-spacing: 0.01em;
+}
+
+#footer-socialmedia li { list-style: none; }
+
+.iconbar-languagechooser { display: none; }
+
+#language_chooser_container { display: none; }
+#language_chooser_container .btn-group {
+    display: inline-block;
+    width: 120px;
+    margin: 0 0 0 10px;
+}
+
+#language_chooser_container button {
+    border: 1px solid rgb(204,204,204);
+    padding-right: 24px;
+    padding: 3px 24px 3px 6px;
+}
+
+#footer-iconbar { padding-top: 20px; }
+
+
+/* correct detachment for top categories */
+#header-menu .mainmenu li.level-1 { margin: 0; }

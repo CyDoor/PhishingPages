@@ -1,0 +1,48 @@
+/* styles for policy header */
+
+#policy_header {
+    background-color: #F0F0ED;
+    clear: both;
+    color: #8E8682;
+    display: block;
+    font-family: Georgia,serif;
+    font-size: 11px;
+    font-style: italic;
+    height: 39px;
+    letter-spacing: 0;
+    width: 100%;
+}
+
+
+#policy_header .policy_header_text {
+    line-height: 39px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+#policy_header .policy_header_text a{
+    font-weight:bold;
+    text-decoration:underline;
+    color: #8e8682;
+}
+
+#policy_header .policy_header_text img{
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+#policy_header .globallayer_close_text{
+    font-style: normal;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.font-lucida {
+    font-family: "Lucida Sans Unicode","Lucida Grande",Arial,sans-serif;
+}
+
+span.globallayer_close_text { text-transform: uppercase; }
+
+span.globallayer_close_text img { vertical-align: top; }

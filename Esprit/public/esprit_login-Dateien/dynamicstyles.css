@@ -1,0 +1,587 @@
+/*
+ * Language: de
+ * Country: DE
+ * BasePath: https://www.esprit.de/
+ * PicBase: https://pics3.esprit.de/Shop
+ */
+
+/** default **/
+
+.arrow-right {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right_small.gif) 100% 4px no-repeat;
+}
+
+.ie .arrow-right {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right_small.gif) 100% center no-repeat;
+}
+
+.singleproductview-controls .arrow-right {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right_small.gif) 100% 3px no-repeat;
+}
+
+.ie .singleproductview-controls .arrow-right {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right_small.gif) 100% center no-repeat;
+}
+
+.arrow-left {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left_small.gif) no-repeat 100% 5px;
+}
+
+.fit-arrow-right {
+    background:transparent url(https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/right_arrow.png) no-repeat 100% 3px;
+    background-position: center center;
+}
+
+.fit-arrow-left {
+    background:transparent url(https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/left_arrow.png) no-repeat 100% 5px;
+    background-position: center center;
+}
+
+/* horizontal separator for a container */
+.hcenter-separator {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/pixel_ccc2bc.gif) repeat-y 50% 0;
+}
+
+/* Font: Same Same But Different */
+@font-face {
+    font-family: 'SameSameButDifferentRegular';
+    src: url('https://www.esprit.de/fonts/samesamebutdifferent-webfont.eot');
+    src: url('https://www.esprit.de/fonts/samesamebutdifferent-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://www.esprit.de/fonts/samesamebutdifferent-webfont.woff') format('woff'),
+         url('https://www.esprit.de/fonts/samesamebutdifferent-webfont.ttf') format('truetype'),
+         url('https://www.esprit.de/fonts/samesamebutdifferent-webfont.svg#SameSameButDifferentRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Font:Dear Joe IV */
+@font-face {
+    font-family: 'DearJoeFour';
+    src: url('https://www.esprit.de/fonts/dearJoe4-webfont.eot');
+    src: url('https://www.esprit.de/fonts/dearJoe4-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://www.esprit.de/fonts/dearJoe4-webfont.woff') format('woff'),
+         url('https://www.esprit.de/fonts/dearJoe4.ttf') format('truetype'),
+         url('https://www.esprit.de/fonts/dearJoe4-webfont.svg#dearJoeFour') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#brandnew_slider a.slider-arrow-right {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/startpage/brand_new_arrow_right.gif) no-repeat scroll 0 0 #FFFFFF;
+}
+#brandnew_slider a.slider-arrow-left {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/startpage/brand_new_arrow_left.gif) no-repeat scroll 0 0 #FFFFFF;
+}
+
+#login form input#password {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/input_login.png) no-repeat 0 0;
+}
+#login form input#login {
+    background: #ccc2bc url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png) no-repeat 95% 50%;
+}
+#password-forgot form input#account {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/input_login.png) no-repeat 0 0;
+}
+
+/** StyleOverview **/
+#styleoverview .style .style-colorset .style-detail
+{
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_style_left.png) no-repeat 0 200px;
+}
+#styleoverview .style.last .style-colorset .style-detail
+{
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_style_right.png) no-repeat 100% 200px;
+}
+
+#styleoverview .style .sylte-fit-description-enumeration-head {
+    background-image: url(https://pics3.esprit.de/Shop/images/default/global/list_item_square.gif);
+}
+
+/** Sizefilter **/
+
+#sizefilter li.switch-on,
+#fitfilter li.switch-on
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif")
+        no-repeat scroll 0 50%;
+}
+
+#sizefilter li.disabled,
+#fitfilter li.disabled
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/icon_checkbox_disabled.png")
+        no-repeat scroll 0 50%;
+}
+
+#sizefilter li,
+#fitfilter li
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif")
+        no-repeat scroll 0 50%;
+}
+
+/** SingleProductView **/
+.singleproductview .singleproductview-controls .singleproductview-controls-lighter {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_controls_lighter.png) no-repeat 0 0;
+}
+.singleproductview .singleproductview-controls .singleproductview-controls-video {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_controls_video.png) no-repeat 0 0;
+}
+.singleproductview .singleproductview-controls .singleproductview-controls-measure {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/size_and_fit_info.png) no-repeat 0 0;
+}
+.singleproductview .singleproductview-controls .singleproductview-controls-rotation {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/360_view.png) no-repeat 0 0;
+}
+.singleproductview .singleproductview-controls .singleproductview-controls-fullscreen {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_controls_fullscreen.png) no-repeat 0 0;
+}
+
+.singleproductview .singleproductview-controls .singleproductview-controls-tryOn {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_controls_tryOn.gif) no-repeat 0 0;
+}
+.styleimage-arrow-left {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left.png") no-repeat 0 0;
+}
+.styleimage-arrow-right {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png") no-repeat 0 0;
+}
+.singleproductview-details-text-long ul,
+.singleproductview-productinfo ul {
+    list-style-image:url("https://pics3.esprit.de/Shop/images/default/global/ul_li_minus.gif");
+}
+.singleproductview-lastvisited a.slider-arrow-left {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left.png) no-repeat 0 0;
+}
+.singleproductview-lastvisited a.slider-arrow-right {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png) no-repeat 0 0;
+}
+.singleproductview-maylike-titles div span {
+    background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right_small.gif) no-repeat 100% 5px;
+}
+#sizechooser-selection, .sizechooser-selection {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png") no-repeat scroll 192px 11px;
+}
+
+.outfit .sizechooser-selection {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png") no-repeat scroll 122px 9px;
+}
+
+#colorchooser-selection, .colorchooser-selection {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png") no-repeat scroll 193px 9px;
+}
+#sizechooser-selection li,
+.sizechooser.default li,
+#basket_sizechooser li,
+#wishlistSizechooser li {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_checkbox_unchecked.gif") no-repeat 0 5px;
+}
+#sizechooser-selection li,
+.sizechooser.default li.active,
+#basket_sizechooser li.active,
+#wishlistSizechooser li.active {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_checkbox_checked.gif") no-repeat 0 5px;
+}
+
+#stylefilter-size a , #stylefilter-fit a, #stylesortby a {
+	background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png") no-repeat 100% 7px;
+}
+#sortby li.option {
+    padding-left: 15px;
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif") no-repeat scroll 0 50%;
+}
+#sortby li.option.switch-on {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat scroll 0 50%;
+}
+
+
+.zoomPreload{
+    background: transparent url('https://pics3.esprit.de/Shop/images/default/global/icon_loading.gif') no-repeat 0 0;
+}
+
+#styleinfolayer_fitinfo .styleinfolayer_fitinfo_container .fit_line {
+    background-image : url('https://pics3.esprit.de/Shop/images/default/global/styleinfolayer/description_line.gif');
+}
+
+#htmlFitGuidesShirts .htmlFitGuidesShirtsContent_clickbox div,
+.VerlinkungStyleBeratung div,
+.fabric_search
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/transparent.gif');
+}
+
+.fitguide-backbutton {
+    background: transparent url('https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/left_arrow.png') no-repeat 100% 5px;
+}
+.fitguide-select-button .fitguide-content-selectbox-field {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/input_newsletter.png") no-repeat scroll 0 0 #FFFFFF;
+}
+.fitguide-select-button .fitguide-content-selectbox-field-display {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/down_arrow.gif") no-repeat 145px 8px;
+}
+.fitguide-select-button .fitguide-content-selectbox-field-display-text {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0 3px;
+}
+.fitguide-select-button li.switch-on
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0px 50%;
+}
+.fitguide-select-button li {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif") no-repeat 0px 50%;
+}
+#fitguide-startpage .fitguide-content-selectbox-field-display {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/down_arrow.gif") no-repeat 165px 10px;
+}
+#fitguide-startpage .fitguide-content-selectbox-field-display-text {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0 3px;
+}
+#fitguide-startpage .fitguide-content-selectbox li.switch-on
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0px 50%;
+}
+#fitguide-startpage .fitguide-content-selectbox li {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif") no-repeat 0px 50%;
+}
+#fitguide-startpage .fitguide-content-selectbox-field {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/input_newsletter.png") no-repeat scroll 0 0 #FFFFFF;
+}
+#fitguide-startpage .fitguide-content-legsharpinfobox-thightext,
+#fitguide-startpage .fitguide-content-legsharpinfobox-legtext {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/line.jpg") 0px 6px no-repeat;
+}
+#fitguide-fitspage .fitguide-content-container-fit-compareswitch.switch-off
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif") no-repeat 0 3px;
+}
+#fitguide-fitspage .fitguide-content-container-fit-compareswitch.switch-on
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0 3px;
+}
+#fitguide-comparepage table.fitguide-comparepage-table li.switch-on
+{
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_selected.gif") no-repeat 0px 50%;
+}
+#fitguide-comparepage table.fitguide-comparepage-table li {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/checkbox_unselected.gif") no-repeat 0px 50%;
+}
+#fitguide-compare2fitspage .fitguide-content-information-waist,
+#fitguide-compare2fitspage .fitguide-content-information-thighlength,
+#fitguide-compare2fitspage .fitguide-content-information-legduring,
+#fitguide-compare2fitspage .fitguide-content-information-hem,
+#fitguide-compare2fitspage .fitguide-content-information-hem_men {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/left_arrow_big.png") 130px 50% no-repeat;
+}
+#fitguide-fitinformationpage .fitguide-content-information-waist,
+#fitguide-fitinformationpage .fitguide-content-information-thighlength,
+#fitguide-fitinformationpage .fitguide-content-information-legduring ,
+#fitguide-fitinformationpage .fitguide-content-information-hem,
+#fitguide-fitinformationpage .fitguide-content-information-hem_men {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/left_arrow_big.png") 311px 50% no-repeat;
+}
+.ie7 #fitguide-fitinformationpage .fitguide-content-information-waist,
+.ie7 #fitguide-fitinformationpage .fitguide-content-information-thighlength,
+.ie7 #fitguide-fitinformationpage .fitguide-content-information-legduring,
+.ie7 #fitguide-fitinformationpage .fitguide-content-information-hem,
+.ie7 #fitguide-fitinformationpage .fitguide-content-information-hem_men {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/left_arrow_big.png") 111px 50% no-repeat;
+}
+#fitguide-fitinformationpage .fitguide-content-arraow-left {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/right_arrow_big.png") 116px 50% no-repeat; /*arrow is 84px wide*/
+}
+#fitguide-fitinformationpage .fitguide-content-information-text {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/fitguides/HtmlFitGuides/Denim/gradient_bg.gif") no-repeat;
+}
+
+#search-outofstock div.search-image,
+#search-nothingfound div.search-image {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/search/input_search_long.gif) no-repeat scroll 0 0 #FFFFFF;
+}
+#search-outofstock .search-rdelayer a.slider-arrow-left,
+#search-nothingfound .search-rdelayer a.slider-arrow-left
+{
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left.png) no-repeat 0 0;
+}
+
+#search-outofstock .search-rdelayer a.slider-arrow-right,
+#search-nothingfound .search-rdelayer a.slider-arrow-right
+{
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png) no-repeat 0 0;
+}
+
+#basketEmptyLink .continueShopppingArrow {
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/basket/continue_shoppping_left_arrow.png") no-repeat 0 5px;
+}
+
+.container_to_checkout .basketMiniNavi .to_shop{
+    background: #FFF url("https://pics3.esprit.de/Shop/images/default/global/basket/continue_shoppping_left_arrow.png") no-repeat 0 15px;
+}
+
+#basket_specialoffer a.slider-arrow-left {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left.png) no-repeat 0 0;
+}
+#basket_specialoffer a.slider-arrow-right {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png) no-repeat 0 0;
+}
+
+.outfit .soldout-image {
+    background-image : url('https://pics3.esprit.de/Shop/images/default/language/de/search/sold_out_stamp.png');
+}
+
+.outfit .selectbox-selection {
+	background-image: 	url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png);
+}
+.outfit .sizechooser form, .outfit .sizechooser-inactive form {
+	background: 		url(https://pics3.esprit.de/Shop/images/default/global/border_1px_9a9a9a.gif) no-repeat scroll 174px 0 #FFFFFF;
+}
+
+/** help.css **/
+
+#SizeChartsDynContentLeft table.helpSizeTablesBackground_dynamic,
+#SizeChartsDynContentLeft table.helpHorizontalTables_dynamic
+{
+    background:        url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_274px.gif')  repeat-x scroll 0 0 transparent;
+}
+
+#styleinfolayer_tabs div.offTab    { background-image: url('https://pics3.esprit.de/Shop/images/default/global/styleinfolayer/off.gif'); }
+#styleinfolayer_tabs div.onTab    { background-image: url('https://pics3.esprit.de/Shop/images/default/global/styleinfolayer/on.gif'); }
+
+#sizes_info_content .sizetable_container table
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_55px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_size_manu_big,
+#sizes_info_content .sizetable_container .sizetable_edcteen_manu_size_big,
+#sizes_info_content .sizetable_container .sizetable_manu_size_big,
+#sizes_info_content .sizetable_container .sizetable_collar_size_big,
+#sizes_info_content .sizetable_container .sizetable_edcteen_size_manu_big,
+#sizes_info_content .sizetable_container .sizetable_edcteenjeans_size_manu_big,
+#sizes_info_content .sizetable_container .sizetable_socks_manu_size_big,
+#sizes_info_content .sizetable_container .sizetable_manu_inch,
+#sizes_info_content .sizetable_container .sizetable_socks_shoesize_length,
+#sizes_info_content .sizetable_container .sizetable_hats_size_cm,
+#sizes_info_content .sizetable_container .sizetable_boodywear_size
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_73px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_shoes_size_length
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_106px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_inch_manu_size,
+#sizes_info_content .sizetable_container .sizetable_kids_belt_cm_manu,
+#sizes_info_content .sizetable_container .sizetable_youth_belt_cm_manu
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_101px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_belt_cm_manu_size
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_169px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_size_size_glove,
+#sizes_info_content .sizetable_container .sizetable_rings.sizetable_men
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_113px.gif');
+}
+#sizes_info_content .sizetable_container .sizetable_inch_manu_manu,
+#sizes_info_content .sizetable_container .sizetable_manu_manu_inch,
+#sizes_info_content .sizetable_container .sizetable_manu_manu_size,
+#sizes_info_content .sizetable_container .sizetable_manu_bodysize_age,
+#sizes_info_content .sizetable_container .sizetable_manu_bodysize_age_big,
+#sizes_info_content .sizetable_container .sizetable_size_manu_bodysize_age,
+#sizes_info_content .sizetable_container .sizetable_size_shoesize_length,
+#sizes_info_content .sizetable_container .sizetable_size_manu_head,
+#sizes_info_content .sizetable_container .sizetable_background_274
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_106px.jpg');
+}
+
+#sizes_info_content .sizetable_container .sizetable_size_manu_bodysize_age_big,
+#sizes_info_content .sizetable_container .sizetable_manu_manu_manu_inch
+{
+    background: transparent url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_169px.jpg') repeat-x left top;
+}
+
+#sizes_info_content .sizetable_container .sizetable_cups
+{
+    background: transparent url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_199px.gif') repeat-x left top;
+}
+
+#fit_info_content .fit_info_img .denim_fit_labels_row .denim_fit_line
+{
+    background: transparent url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/line.gif') left center repeat-x;
+}
+
+.bootSizeDimTable
+{
+    background: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_171px.gif');
+}
+#sizes_info_content .sizetable_container .sizetable_rings,
+#sizes_info_content .sizetable_container .sizetable_background_274
+{
+    background-image: url('https://pics3.esprit.de/Shop/images/default/global/help/styleinfolayer/table_bg_slice_1px_274px.gif');
+}
+
+/* jQuery Selectbox */
+.sbHolder
+{
+    background:            #FFFFFF url('https://pics3.esprit.de/Shop/images/default/global/text_field_gradient.png') top left no-repeat;
+}
+.sbToggle,
+.sbToggle:hover,
+.sbToggleOpen,
+.sbToggleOpen:hover
+{
+    background:            url('https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png') 17px 9px no-repeat;
+}
+
+
+#giftcard_staticContent
+{
+    background-image:url('https://pics3.esprit.de/Shop/giftcards/global/design/giftcard_new/background.png');
+}
+
+#giftcard_slideContainer .giftcard_textfield_message textarea
+{
+	background: none;
+}
+
+#giftcard_slideContainer .giftcard_textfield_message
+{
+    background-image:url('https://pics3.esprit.de/Shop/giftcards/global/design/giftcard_new/form_back_big.png');
+    background-position: center top;
+    background-repeat: no-repeat;
+
+}
+/*
+span.button_container {
+    background: url('https://pics3.esprit.de/Shop/images/default/global/button/button-end.png') no-repeat scroll right top transparent;
+    display: inline-block;
+    margin-top: 1px;
+    padding: 0 16px 0 0;
+ }
+
+span.button_container a {
+    background: url('https://pics3.esprit.de/Shop/images/default/global/button/button-start.png') no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: "Georgia", "Droid Serif", serif;
+    padding: 3px 0 5px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+*/
+
+span.button_container a:hover {
+    text-decoration: underline;
+}
+
+.button_container_pov {
+    width: 177px;
+ }
+
+  .spv-sizeselector {
+ }
+
+#outfitbasket {
+    background: url('https://pics3.esprit.de/Shop/images/default/global/button/button-end.png') repeat-y scroll right top transparent;
+}
+
+div.singleproductview-details-addtobasket.outfitlayerbtn {
+    background: url('https://pics3.esprit.de/Shop/images/default/global/button/button-start.png') no-repeat scroll 0 0 transparent;
+}
+
+.singleproductview-looks a.slider-arrow-left,
+.singleproductview-lastvisited a.slider-arrow-left {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_left.png) no-repeat 0 0;
+}
+.singleproductview-looks a.slider-arrow-right,
+.singleproductview-lastvisited a.slider-arrow-right {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_right.png) no-repeat 0 0;
+}
+
+div.selectbox-selection {
+    width: 177px;
+    height: 19px;
+    color: #4747467;
+    border-bottom: 0;
+}
+.outfit .opv .selectbox-selection {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png) no-repeat scroll 165px #FFFFFF;
+}
+.selectbox-selection,
+.countbox-selection
+{
+	background-image: url(https://pics3.esprit.de/Shop/images/default/global/icon_arrow_down.png);
+}
+
+.scrolltext-scroll-up {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_scroll_up_on.gif) no-repeat 50% 0;
+}
+.scrolltext-scroll-down {
+	background: #FFF url(https://pics3.esprit.de/Shop/images/default/global/icon_scroll_down_on.gif) no-repeat 50% 100%;
+}
+.scrolltext-scroll-up.inactive {
+	background-image: url(https://pics3.esprit.de/Shop/images/default/global/icon_scroll_up_off.gif);
+}
+.scrolltext-scroll-down.inactive {
+	background-image: url(https://pics3.esprit.de/Shop/images/default/global/icon_scroll_down_off.gif);
+}
+
+.singleproductview-details-price-stamps-back {
+	background-image: url(https://pics3.esprit.de/Shop/images/default/language/de/flags/stamp_bonaffaire.gif);
+	height: 44px;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+/* START Styles for wishlist */
+
+.wishlist-add-header-wishlist,
+#wishlist-page-header-wishlist {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/wishlist/heart_wishlist.png) no-repeat 0px 4px;
+}
+#wishlist-articles .wishlist-article {
+    background: url(https://pics3.esprit.de/Shop/images/default/global/wishlist/box_wishlist.jpg) no-repeat;
+}
+#wishlist-empty .wishlist-empty-goon-button,
+.wishlist-delete-layer-buttons-yes,
+.wishlist-delete-layer-buttons-no,
+.wishlist-edit-layer-buttons-cancel,
+.wishlist-edit-layer-buttons-change,
+.wishlist-add-info-buttons-goon,
+.wishlist-add-info-buttons-wishlist,
+#wishlistSizechooser form p {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/button/button-end.png") no-repeat scroll right top transparent;
+}
+#wishlist-empty .wishlist-empty-goon-button span,
+.wishlist-delete-layer-buttons-yes span,
+.wishlist-delete-layer-buttons-no span,
+.wishlist-edit-layer-buttons-cancel span,
+.wishlist-edit-layer-buttons-change span,
+.wishlist-add-info-buttons-goon span,
+.wishlist-add-info-buttons-wishlist span,
+#wishlistSizechooser form input.sizechooser-select {
+    background: url("https://pics3.esprit.de/Shop/images/default/global/button/button-start.png") no-repeat scroll 0 0 transparent;
+}
+/* END Styles for wishlist */
+
+
+/* background-image | Feature: buy py 2 */
+#styleoverview .style .style-stamp-buy3pay2 .style-stamp-buy3pay2-info
+{
+	 background-image: url("https://pics3.esprit.de/Shop/images/default/language/de/flags/stamp_3for2_bg.png");
+}
+
+/* background-image | imagemap-carrousel */
+div.jquery-imagemap-carousel ul li div{
+	background: url("https://pics3.esprit.de/Shop/images/default/global/jquery-plugins/imagemap-carrousel/link-dots.png") no-repeat left center;
+}
+

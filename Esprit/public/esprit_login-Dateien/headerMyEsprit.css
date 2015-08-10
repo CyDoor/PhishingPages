@@ -1,0 +1,99 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* header myEsprit */
+#header_myesprit {
+    display: none;
+    float: left;
+    position: relative;
+    z-index: 15;
+    margin: 11px 40px 0 0;
+    padding: 0 0 0 15px;
+    font-size: 11px;
+    line-height: 18px;
+    color: #8e8682;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_esp_my_esprit.png') 0 2px no-repeat;
+}
+
+.wysiwyg #header_myesprit {
+    margin: 0;
+    top: -4px;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_my-esprit.png') 0 5px no-repeat;
+}
+
+.wysiwyg .header_seperation_letter {
+    font-size: 12px;
+}
+
+body.wysiwyg {
+    background: rgb(0, 0, 0);
+    background: transparent \9;
+    background: rgba(0, 0, 0, 0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#0000000, endColorstr=#0000000);
+    zoom: 1;
+}
+
+body.wysiwyg:nth-child(n) {
+    filter: none;
+}
+
+/* !important notation necessary for Checkout-Header in cause of Checkout css rules */
+#header_myesprit a,
+#header_myesprit p,
+#header_myesprit_login button {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+    font-weight: normal !important;
+}
+
+#header_myesprit_logout {
+    display: none;
+}
+
+#header_myesprit_login {
+    display: inline;
+    font-family: inherit;
+}
+
+#header_myesprit_login button {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    border: none;
+    background-color: transparent;
+}
+
+#header_myesprit_salutation {
+    display: none;
+    position: absolute;
+    white-space: nowrap;
+}
+
+#header_myesprit_salutation em {
+    font-style: normal !important;
+    font-size: inherit !important;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* -- LEGACY Checkout ??? -- */
+/*
+.checkout_login .header-info-box {
+    display: none;
+}
+
+.checkout_addresslogisticpartner .header-info-box {
+    display: none;
+}
+
+.checkout_confirmation .header-info-box {
+    display: none;
+}
+
+.checkout_payment .header-info-box {
+    display: none;
+}
+
+.checkout_thanks .header-info-box {
+    display: none;
+}
+*/

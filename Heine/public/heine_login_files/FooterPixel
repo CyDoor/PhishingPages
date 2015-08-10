@@ -1,0 +1,3246 @@
+
+if ($(location).attr('href').indexOf("showfooterPix=true")!=-1)
+{
+	setOMCookie('showfooterPix',true);
+}
+
+
+pixID=getOMCookie('PixID');
+
+$.getScriptc = function(url, callback, cache){
+    $.ajax({
+            type: "GET",
+            url: url,
+            success: callback,
+            dataType: "script",
+            cache: cache,
+            timeout: 1000
+    });
+};
+
+$.getJSONc = function(url, callback, cache){
+    $.ajax({
+            type: "GET",
+            url: url,
+            success: callback,
+            dataType: "json",
+            cache: cache
+    });
+};
+
+
+
+var ft_pixelURL = new Array();
+
+
+var ft_scriptURL = new Array();
+
+var ft_iframeURL = new Array();
+
+var ft_pixelProtocol=window.location.protocol+"//";
+
+
+function ft_omDebug(omdText)
+{
+	
+	var showfooterPix=getOMCookie("showfooterPix");
+	if (showfooterPix=="true")
+	{
+		if (typeof(console)!="undefined" && console!=null)
+		{
+			console.log(omdText);
+		}
+		if (document.getElementById("ft_ompLayer")!=null)
+		{
+
+			omp_Layer=$('#ft_ompLayer');
+			$('#ft_killme').remove();
+			omdText=omp_Layer.html()+omdText;
+			omp_Layer.html(omdText);
+		}
+		else
+		{
+
+			var ft_omp_Layer=$("<div></div>");
+			ft_omp_Layer.html(omdText);
+			ft_omp_Layer.addClass("ft_ompLayer");
+			ft_omp_Layer.attr("id","ft_ompLayer");
+			ft_omp_Layer.attr("title","click to kill me!");
+			ft_omp_Layer.click(function(){ft_omp_Layer.fadeOut('slow')});
+			$("body").append(ft_omp_Layer);
+		}
+	}
+}
+var ft_omPDebug="<b style='text-decoration:underline;'>Footer OM-Pixel Debugging</b><br><br><p id='ft_killme'>Lade...</p>";
+ft_omDebug(ft_omPDebug);
+
+
+
+function ft_fp_asImage(pixelURL)
+{
+	var p_image=$("<img/>");
+	p_image.attr("src",pixelURL);
+	p_image.attr("width","0");
+	p_image.attr("height","0");
+	$("body").append(p_image);
+	ft_omDebug("<b>Gefeuertes Pixel als img: </b>"+ pixelURL+"<br><br>");
+
+}
+
+function ft_fp_asIFrame(frameURL)
+{
+	var p_frame=$("<iframe></iframe>");
+	p_frame.attr("src",frameURL);
+	p_frame.attr("frameBorder","0");
+	$("body").append(p_frame);
+	ft_omDebug("<b>Gefeuertes Pixel als iframe: </b>"+ frameURL+"<br><br>");
+}
+
+function ft_load_JSext(scriptURL)
+{
+	
+	document.write=function()
+	{
+		ft_omDebug("FEHLER: Pixel mit URL: "+scriptURL+" hat versucht ein document.write auszuführen!!!<br/>");
+		return false;
+	}
+
+	 if (typeof(scriptURL)==='object')
+	 {
+	 	
+		for (addF in scriptURL.functions)
+		{
+			try
+			{
+				scriptURL.functions[addF];
+				if (typeof(toSource)==="function")
+				{
+					var functionText="<b>Funktionsaufruf aus externem JS: </b>"+ scriptURL.functions[addF].toSource();
+					functionText+="<b> für Pixel: </b>"+scriptURL.url+"<br><br>";
+					ft_omDebug(functionText);
+				}
+				else
+				{
+					ft_omDebug("<b>In Schrottbrowsern kann der Funktionsinhalt nicht ausgegeben werden:</b> "+scriptURL.url+"<br><br>");
+				}
+			}
+			catch (e)
+			{
+				ft_omDebug("<div class='omdError'>FEHLER: Externer Funktionsaufruf von "+scriptURL.functions[addF]+" gescheitert weil "+e+"</div>");
+			}
+		}
+		$.getScriptc(scriptURL.url,function(){
+	 	ft_omDebug("<b>Geladenes JS von Extern: </b>"+ scriptURL.url+"<br><br>")
+	 	},
+	 	true);
+	 }
+	 else
+	 {
+	 	$.getScriptc(scriptURL,function(){
+	 	ft_omDebug("<b>Geladenes JS von Extern: </b>"+ scriptURL+"<br><br>")
+	 	},
+	 	true);
+	 }
+}
+
+
+
+
+var pix_fired=false;
+$(document).ready(function(){
+	if (e_template=='productView')
+	{
+	
+    $(document).ajaxStop(function(){  
+
+			if (pix_fired==false)
+			{
+			    pix_fired=true;
+			    
+			var fire_xpl = false;
+var rplPrice = {
+	'1' : 'EUR',
+	'2' : 'EUR',
+	'3' : 'CHF',
+	'4' : 'EUR',
+	'5' : 'GBP'
+};
+
+switch (e_template) {
+	
+	/************************************/
+	/**************XPACK*****************/
+	/************************************/		
+	case 'categoryResultList':
+	case 'mobile.categoryResultList':
+			xpl_params = {};
+		    xpl_params.event_id = 'shop_visit';
+		    xpl_params.shop_id = jsCatName;	// Shopnummer
+		    xpl_params.shop_trackingproducts = '' ;
+		
+		    var i=0;
+		    if($('#products li.article-list-item').length)
+		    {
+		    $('#products li.article-list-item').each(
+		        function()
+		        {
+		        	var pn = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+		        	if (typeof pn == 'string') {
+			           	if (i!=0 && i<6)
+			            {
+			                xpl_params.shop_trackingproducts += ',';
+			            }
+			            if (i<6)
+			            { 
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			            		
+			            	}i++;		            	
+				           	xpl_params.shop_trackingproducts += pn;		                
+			            }
+			            else
+			            {
+			            	return;
+			            }
+	
+			            
+		            }
+		        }
+		    );
+		    }		    
+		    else
+		    {
+		    	 var i=0;
+		    	$('.xPackLink').each(function(){
+		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+		    		 	if (i<6){ 
+		    		 		if(i>0)
+		    		 		xpl_params.shop_trackingproducts += ',';
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           		}		            	
+				        	xpl_params.shop_trackingproducts += pn;		    
+				        	i++;            
+			        	}
+			        	else return;
+			        }
+		    	
+		    	})
+		    }
+		
+		    fire_xpl=true;
+
+		break;
+		
+	/************************************/
+	/*************DETAILVIEW*************/
+	/************************************/		
+	case 'productView':
+	case 'mobile.productView':
+
+			var xpl_params = {};
+		    xpl_params.event_id = 'product_view';
+		    if (typeof(jsCatName)!='undefined' && jsCatName!='')
+		    {
+		        xpl_params.shop_id = jsCatName;	// Shopnummer
+		    }
+		    else if($('.breadcrumb').data('root-category-id')!==null)
+		    {
+		    	xpl_params.shop_id = String($('.breadcrumb').data('root-category-id'));
+		    }
+		    else		    
+		    {
+		    	xpl_params.shop_id = String($('#breadcrumb').data('root-category-id'));
+		    }
+		    if (typeof(gProductController)=='object' && gProductController != null
+		    	&& typeof(gProductController.selectedArticle)=='object' && gProductController.selectedArticle != null
+		    	&& typeof(gProductController.selectedArticle.SKU)=='string')
+		    {
+		    	var pn = gProductController.selectedArticle.SKU.split('-')[0];
+		    }
+		    else
+		    {
+		    	var pn='XXXXXX'
+		    }
+		    while (pn.length < 6) {
+		    	pn = '0'+pn;
+		    }
+		    
+		    xpl_params.product_id = pn;
+		    		    
+		    var price = '';  
+		    if (gProductController!=null && gProductController.selectedArticle!=null && gProductController.selectedArticle.price!=null)
+		    {
+		    	price = gProductController.selectedArticle.price;
+		    }
+		    if (price.indexOf('&nbsp;') > -1) {
+		    	price = price.split('&nbsp;')[1];
+		    } else {
+		    	price = price.replace(rplPrice[e_domain], '');
+		    }
+		    
+		    xpl_params.product_price = price;
+		    
+			
+		    if ($('.js_article_price.sale').html()!=null)
+		    {
+		       xpl_params.product_onsale = 1;
+		    }
+		    else
+		    {
+		       xpl_params.product_onsale = 0;
+		    }
+		    
+		    fire_xpl=true;
+	
+	
+		break;
+	
+	/************************************/
+	/*********CHECKOUT*STEP*1************/
+	/************************************/
+	case 'checkout.content.step1':
+	case 'mobile.checkout.content.step1':
+			var xpl_params = {};
+		    xpl_params.event_id = 'add_to_basket';
+		    var artNos = [], quants = [];
+		    for (var i=0; i < gProductControllers.length; i++) {
+		        var ctrl = gProductControllers[i];
+		        artNos.push(ctrl.selectedArticle.Attributes.ArtNo);
+		        quants.push(ctrl.selectedArticle.getQuantity.value);
+		    }
+		    xpl_params.order_article = artNos.join(',');
+		    xpl_params.product_quantity = quants.join(',');
+		    
+		    fire_xpl = true;
+		break;
+			
+	/************************************/
+	/***************LOGIN****************/
+	/************************************/
+	case 'LogonSetup' :
+			var xpl_params = {};
+	    	xpl_params.event_id = 'login';
+	    	
+	    	fire_xpl=true;
+		break;
+		
+	/************************************/
+	/***************SEARCH***************/
+	/************************************/
+	case 'searchResultList' :
+	case 'mobile.searchResultList':
+	
+			var xpl_params = {};
+		    xpl_params.event_id = 'search_result';
+		    xpl_params.shop_trackingproducts = '';
+		    if(typeof(emospro.search)==='object')
+		    xpl_params.user_searchkeywords = emospro.search[0][0].replace(' ', '_');
+			
+			if ($('#products li.article-list-item').length)
+			{
+			    var i=0;
+				$('#products li.article-list-item').each(
+			        function()
+			        {
+			        	var pn = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+			        	if (typeof pn == 'string') {
+				            if (i<6)
+				            { 
+				            	while (pn.length < 6) {
+				            		pn = '0'+pn;
+				            	}		            	
+					           	xpl_params.shop_trackingproducts += pn;		                
+				            }
+				            if (i<5)
+				            {
+				                xpl_params.shop_trackingproducts += ',';
+				            }
+				            i++;
+				        }
+			        }
+			    );
+		    }
+		    
+		    else
+		    {
+		    	 var i=0;
+		    	$('.xPackLink').each(function(){
+ 		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+		    		 	if (i<6){ 
+		    		 		if(i>0)
+		    		 		xpl_params.shop_trackingproducts += ',';
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           		}	
+            	
+				        	xpl_params.shop_trackingproducts += pn;		    
+				        	i++;            
+			        	}
+			        	else
+			            {
+			            	return false;
+			            }	
+		    		}
+		    	})
+		    }
+		
+    		fire_xpl=true;
+		
+		break;
+		
+	/************************************/
+	/************PLACED ORDER ***********/
+	/************************************/
+	
+	case 'checkout.placedOrder.content' : 
+	case 'mobile.checkout.placedOrder.content' :
+			
+			var xpl_params = {};
+		    xpl_params.event_id = 'order';
+		    xpl_params.order_article = '';
+		    xpl_params.product_quantity = '';
+		    xpl_params.order_total = '';
+		    xpl_params.order_revenue = '';
+		    xpl_params.order_id = '';
+		    xpl_params.xpl_sale = 'false';
+		
+		    for (var bought in emospro.ec_Event)
+		    {
+		        xpl_params.order_article    += emospro.ec_Event[bought][1].match(/[0-9]{0,6}/g)[0];
+		        xpl_params.product_quantity += emospro.ec_Event[bought][5];
+		        xpl_params.order_revenue    += emospro.ec_Event[bought][3];
+		        if (bought  < (emospro.ec_Event.length-1))
+		        {
+		            xpl_params.order_article    += ',';
+		            xpl_params.product_quantity += ',';
+		            xpl_params.order_revenue    += ',';
+		        }
+		    }
+		    xpl_params.order_total = emospro.billing[0][3];
+		    xpl_params.order_id = emospro.billing[0][0];
+			
+			switch (pixID) {
+				case '037' :
+						if (e_domain=='1') {
+							xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        case '038' :
+			         	if (e_domain=='2') {
+			         		xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        case '039' :
+			        	if (e_domain=='3') {
+			        		xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        
+		    }
+		    fire_xpl=true;
+			
+		break;
+		
+	default : 
+	
+		break;
+	
+} 
+
+
+if (fire_xpl==true)
+{
+	var localCustomer = null;  
+	switch (e_domain) {
+		case '1' : 
+				localCustomer = 'heine.de';
+			break;
+		case '2' : 
+				localCustomer = 'heine.at';
+			break;			
+		case '3' : 
+				localCustomer = 'heine.ch';
+			break;
+		case '4' : 
+				localCustomer = 'heine.nl';
+			break;
+		case '5' : 
+				localCustomer = 'heine.co.uk';
+			break;
+		default :
+				localCustomer = 'unknown';
+	}
+    
+    var localParameters='';
+    try {
+        for (xpl_param in xpl_params) {
+            localParameters += '&' + xpl_param + '=' + encodeURIComponent(xpl_params[xpl_param]);
+        }
+    } catch(e) {
+        console.log('Error: ' + e);
+    }
+    ft_iframeURL[ft_iframeURL.length] = ft_pixelProtocol + 'ssl.xplosion.de/profiler.html?customer=' + localCustomer + localParameters;
+    		econdaConsole('----------------------')
+		econdaConsole('  xplosion debugging')	
+		econdaConsole(xpl_params)
+				
+		econdaConsole('xplosion debugging end')
+		econdaConsole('----------------------')
+}
+
+var siteType='d';
+if (gIsTabletDevice==true)
+{
+	siteType='m';
+}
+
+var criteo_account = null;
+switch (e_domain) {
+	case '5' : // UK
+			criteo_account = '10977';
+		break;  
+	case '4' : // NL
+			criteo_account = '1654';
+		break;  
+	case '3' : // CH
+			if (e_language == '21') { // french
+				criteo_account = '4037';
+			} else if (e_language == '31'){ // german
+				criteo_account = '4038';
+			}			
+		break;  
+	case '2' : // AT
+			criteo_account = '4036';
+		break;  
+	case '1' : // DE
+			criteo_account = '3868';
+		break;  
+	default : 
+			criteo_account = 'unknown';
+}
+
+
+switch (e_template)
+{
+	case 'homepage':
+	case 'mobile.homepage':
+			var critEvent='viewHome';
+		break;
+
+	case 'categoryResultList':
+	case 'searchResultList':
+	case 'mobile.categoryResultList':
+	case 'mobile.searchResultList':
+			var critEvent='viewList';
+			var critItems = new Array();
+			
+			if($('#products li.article-list-item').length)
+			{
+				$('#products li.article-list-item').slice(0,3).each(function(index) {
+					var tempItem = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+					
+					while (tempItem.length < 6) {
+						tempItem = '0'+tempItem;
+					}
+					
+					critItems[index]=tempItem;
+									
+				});
+			}
+			
+			else
+			{
+				var count=0;
+		    	$('.xPackLink').each(function(index){
+		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+			            while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           	}		            	
+				       	critItems[index] = pn;		 
+				       	count++;
+				       	if(count>=3)
+				       	return false;   
+				     }
+		    	});
+			}
+		break;
+		
+	case 'productView':
+	case 'mobile.productView':
+		if(typeof(gProductController)=='object' && gProductController != null
+		    	&& typeof(gProductController.selectedArticle)=='object' && gProductController.selectedArticle != null
+		    	&& typeof(gProductController.selectedArticle.SKU)=='string')
+		{
+			var critItems=gProductController.selectedArticle.SKU.split('-')[0];
+    		var critEvent='viewItem';
+		}
+		break;
+		
+	case 'checkout.content.step1':
+	case 'checkout.content.step3':
+	case 'mobile.checkout.content.step1':
+	case 'mobile.checkout.content.step3':
+
+			var critEvent='viewBasket';
+			var critItems=new Array();
+
+				for (var i=0; i < gProductControllers.length; i++) {
+					var product=new Object();
+					var ctrl = gProductControllers[i];
+		        	product.id=ctrl.selectedArticle.Attributes.ArtNo;
+		        	product.quantity=ctrl.selectedArticle.getQuantity.value;
+		        	product.price=ctrl.selectedArticle.getNetPricePCWithoutCurrency.value;
+					critItems[i]=product;
+				}
+				
+
+		
+		break;
+		  
+	case 'checkout.placedOrder.content':
+	case 'mobile.checkout.placedOrder.content':
+			var critU=false;
+			switch (pixID)
+		    {
+		        case '032' :
+		        if (e_domain=='1')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '033' :
+		        if (e_domain=='4')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '034' :
+		        if (e_domain=='3')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '035' :
+		        if (e_domain=='2')
+		        {
+		        	critU=true;
+		        }
+		        break;
+		    }
+						
+			var critEvent='trackTransaction';
+		    var critItems=new Array();
+			var i=0;	
+			for(order in econdaOrder.orderItem) {
+		  		var product=new Object();
+			  	for(userDataItem in econdaOrder.orderItem[order].userData.userDataField) {
+			    	if (econdaOrder.orderItem[order].userData.userDataField[userDataItem].key == 'ArtNo') {
+			    		product.id = econdaOrder.orderItem[order].userData.userDataField[userDataItem].value;
+			    	}    
+			  	}
+		  		product.price = econdaOrder.orderItem[order].orderItemAmount.unitPrice.price.value;
+		  		product.quantity = econdaOrder.orderItem[order].quantity.value;
+		  		critItems[i]=product;
+			    i++;
+			}
+		break;
+}
+
+if (typeof(critEvent) !== 'undefined') {
+    window.criteo_q = window.criteo_q || []; 
+    var criteoParamArray = [];
+    var sepiaALCC = null, dout = null, sepiaCustomerID = '', hashedEmail = '', retourenStatus = null;
+    var ampelValide = false;   
+	if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) {
+	    var sObj = JSON.parse(sessionStorage.getItem('sepia:data'));
+	    	sObj = sObj[0];
+	    	
+	    if (sObj && sObj.kuklanum) {	        
+	        sepiaALCC = sObj.kuklanum;
+	    }
+	    if (sObj && sObj.CustomerID && sObj.CustomerID !== '') {
+	       sepiaCustomerID = sObj.CustomerID;
+	    }
+	    if (sObj) {
+	       var dd = null;
+	       if (e_template === 'checkout.placedOrder.content' || e_template === 'mobile.checkout.placedOrder.content') 
+	       {
+	           if (sObj.bisgelb && sObj.bisgelb > 0) 
+	           {		    
+		          var tbg = sObj.bisgelb * 86400000; 
+		          var dd = new Date();dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+		          dd.setTime(dd.getTime() + tbg);
+		       }
+		   } 
+		   else 
+		   {
+			if (typeof sObj !== 'undefined') {
+			      ampelValide = (sObj.ampelValide && sObj.ampelValide === true); 
+			      if (ampelValide) 
+			      {
+			        if (sObj.ampelGelb && sObj.ampelGelb > 0) 
+			        {
+	                  var dd = new Date(sObj.ampelGelb);
+	                }
+			      } 
+			      else 
+			      {
+			        if (sObj.bisgelb && sObj.bisgelb > 0 && sObj.bestelldat && sObj.bestelldat > 0) 
+			        {
+			          var tbg = sObj.bisgelb * 86400000;                   
+			          var dd = new Date(sObj.bestelldat + tbg);
+			          dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+			        }		
+			      }
+			}      
+		   }
+	       if (dd !== null) {
+	       		var mth = dd.getMonth() + 1;
+              if (mth < 10) mth = '0' + mth;
+              var daym = dd.getDate();
+              if (daym < 10) daym = '0' + daym; 
+              dout = dd.getFullYear() + '-' + mth + '-' + daym;
+           }
+	    }
+	    if(typeof sObj !== 'undefined' && typeof(sObj.emailhash)=='string')
+	    { 
+	    	hashedEmail = sObj.emailhash;
+	    }
+	    if (typeof sObj !== 'undefined') {
+	    	retourenStatus = sObj.retourenstatus;
+	    }
+	}	
+	
+    criteoParamArray.push({ event: 'setSiteType', type: siteType });   
+    criteoParamArray.push({ event: 'setHashedEmail', email: hashedEmail });
+    
+    var criteoMainEventObject = { event: critEvent };
+    if (sepiaALCC !== null) {
+    	
+    	criteoMainEventObject.user_segment = (retourenStatus == 1 || retourenStatus == 2) ? 9 : sepiaALCC;
+    	
+        
+        if (sepiaALCC > 0 && sepiaALCC < 4 && dout !== null) {
+            criteoParamArray.push({ event: 'viewSearch', dout: dout });
+        }
+    }
+    
+	
+    if (typeof(critItems) !== 'undefined') {    
+        if (typeof(critU) !== 'undefined') {            
+            criteoParamArray.push({ event: 'manualDising' });
+            criteoMainEventObject.id = emospro.billing[0][0];
+            criteoMainEventObject.new_customer = emospro.billing[0][5];
+            if (critU == true) {
+                criteoMainEventObject.deduplication = 1;
+            } else {
+                criteoMainEventObject.deduplication = 0;
+            }
+        }
+        criteoMainEventObject.item = critItems;                    
+    }
+    criteoParamArray.push(criteoMainEventObject);
+    if(typeof(window.criteo_q.concat)==='function')
+    window.criteo_q = window.criteo_q.concat(criteoParamArray);
+    window.criteo_q.push({ event: 'setAccount', account: criteo_account });
+    ft_scriptURL[ft_scriptURL.length]=ft_pixelProtocol+'static.criteo.net/js/ld/ld.js';
+    
+    econdaConsole('------------------------------------');
+    econdaConsole('          Criteo Debugging');
+    econdaConsole(criteoParamArray);
+    econdaConsole(criteoMainEventObject);
+    econdaConsole('      Criteo Debugging Ende');
+    econdaConsole('------------------------------------');
+    
+    
+    
+}var jetzt = new Date();
+switch(e_domain)
+{
+	case "1"://germany
+	var zanCountry='5794C2109782549';
+	break; 
+	case "2"://austria
+	var zanCountry='6019C1381685997';
+	break; 
+	case "4"://netherlands
+	var zanCountry='6022C2056773509';
+	break; 
+	
+}
+ft_pixelURL.push(ft_pixelProtocol+"ad.zanox.com/tpi/?"+zanCountry+"&mode=[[2]]&CID=[[pi_all]]&OrderID=[[" + (Math.random()*jetzt.getTime()) + "]]");var customParameters=new Array();
+var cpString=new String();
+var gLabel=new String();
+var goLabel=new String();
+
+function addCustomParameter(parName,parValue)
+{
+    customParameters[customParameters.length]=parName+'='+parValue;
+}
+if (e_domain!=='4')
+{
+	try
+	{	
+	    var kuklanum = 0;
+	    var additionalGoogleNRTTag = null;
+	    if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) {
+	       var sObj = JSON.parse(sessionStorage.getItem('sepia:data'))[0];
+		   if (sObj && sObj.kuklanum) {
+		       kuklanum = sObj.kuklanum;	           
+		   }
+		   if (!sObj.ampelGelb || sObj.ampelGelb == 0) {
+		       if (kuklanum == 3) kuklanum = 4;	       
+		   }
+		   if (sObj && sObj.retourenstatus && sObj.retourenstatus > 0) {
+		   	   kuklanum = 9;
+		   }
+	    }
+	    
+	    
+	    addCustomParameter('ecomm_custgroup', kuklanum);
+	    switch (kuklanum) {
+	            case 4:
+	                additionalGoogleNRTTag = '7gk6CNjF-gcQvLqV7wM';
+	                break;
+	            case 2:
+	                additionalGoogleNRTTag = '--kvCMjH-gcQvLqV7wM';
+	                break;
+	            case 1:
+	                additionalGoogleNRTTag = 'VA6wCMDI-gcQvLqV7wM';
+	                break;
+	            case 3:
+	                additionalGoogleNRTTag = 'rM9tCLDK-gcQvLqV7wM';
+	                break;
+	            case 9:
+	            	additionalGoogleNRTTag = 'omuLCKSil1YQvLqV7wM';
+	            	break;
+	            default: // 0
+	                additionalGoogleNRTTag = '7lIaCNDG-gcQvLqV7wM';
+	    }
+	
+	}
+	catch(e)
+	{
+		econdaConsole(e);
+	}
+}
+var i=0;	
+if (typeof(e_template)==='string')
+{
+    switch(e_template)
+    {
+        case 'homepage':  
+        case 'mobile.homepage':    
+        addCustomParameter('ecomm_pagetype','homepage');
+        break;
+
+        default:    
+        ecomm_pagetype='other';
+        if (typeof(jsCatName) != 'undefined' && jsCatName != '') 
+		{
+		  ecomm_pagetype='category';
+		  addCustomParameter('ecomm_catid',jsCatName);
+		  i++;
+		}
+		if ($("#breadcrumb li.last span").length>0)
+		{
+			var gcatName = $("#breadcrumb li.last span").html().replace(/&Auml;/g,"Ae").replace(/&auml;/g,"ae") .replace(/&Ouml;/g,"Oe") .replace(/&ouml;/g,"oe").replace(/&Uuml;/g,"Ue").replace(/&uuml;/g,"ue").replace(/&szlig;/g,"ss");
+			addCustomParameter('ecomm_category',encodeURI(gcatName));
+        }
+        else if($(".hidden.breadcrumb li.last span").length)
+        {
+        	var gcatName = $(".hidden.breadcrumb li.last span").html().replace(/&Auml;/g,"Ae").replace(/&auml;/g,"ae") .replace(/&Ouml;/g,"Oe") .replace(/&ouml;/g,"oe").replace(/&Uuml;/g,"Ue").replace(/&uuml;/g,"ue").replace(/&szlig;/g,"ss");
+        	addCustomParameter('ecomm_category',encodeURI(gcatName));
+        }
+        if (e_template==='productView' || e_template==='mobile.productView')
+        {    
+	        ecomm_pagetype='product';
+	        if (typeof(gProductController)=='object' && typeof(gProductController.selectedArticle)=='object') 
+	        {
+		        // var ecomm_prodid=gProductController.selectedArticle.getArticleNo().replace('X','').replace('Y','');
+		        var ecomm_prodid="";
+		        if (gProductController != null && gProductController.selectedArticle != null) 
+		        {
+			        ecomm_prodid=gProductController.selectedArticle.getArticleNo().replace('X','').replace('Y','');
+		        }
+		        if (ecomm_prodid != null) 
+		        {
+		            addCustomParameter('ecomm_prodid',ecomm_prodid);
+		        }
+		        if (gProductController != null && gProductController.selectedArticle != null && gProductController.selectedArticle.price != null) 
+		        {
+		        	var ecomm_pvalue=eCurrencyConvert(gProductController.selectedArticle.price);
+		        }
+		        if (ecomm_pvalue != null) 
+		        {
+		            addCustomParameter('ecomm_pvalue',e_price_format(ecomm_pvalue));
+		        }
+		    }
+		}
+
+	    break;
+	    case 'checkout.placedOrder.content':
+	    case 'mobile.checkout.placedOrder.content':
+        ecomm_pagetype='purchase';
+        var gArtikel='';
+        var gPreis='';
+	    for (var bought in emospro.ec_Event)
+	    {
+	        if (bought  > 0)
+            {
+                gArtikel+=',';
+                gPreis+=',';
+            }
+	        gArtikel   += emospro.ec_Event[bought][1].slice(0,6);
+	        gPreis    += emospro.ec_Event[bought][3];
+	     }
+	     var order_articles=[gArtikel];
+         var order_prices=[gPreis];
+         if (typeof(emospro)!='undefined' && typeof emospro.basket=='object')
+         {
+             var ecomm_quantity=emospro.basket[2];
+             var order_value=emospro.basket[1];             
+         }
+         else
+         {
+         	 var ecomm_quantity=0;
+             var order_value=0;   
+         }
+         addCustomParameter('ecomm_prodid',order_articles);
+         addCustomParameter('ecomm_pvalue',order_prices);
+         addCustomParameter('ecomm_quantity',ecomm_quantity);
+         addCustomParameter('ecomm_totalvalue',order_value);
+         break;
+	    }
+	    if (e_template.indexOf('checkout')!=-1 && e_template!='checkout.placedOrder.content' && e_template!='mobile.checkout.placedOrder.content')
+	    {
+	    	if (e_template!='checkout.content.step1' && e_template!='mobile.checkout.content.step1')
+	    	{
+	        	var ecomm_pagetype='checkout';
+            }
+            else
+            {
+            	var ecomm_pagetype='basket';
+			}
+			if(typeof(gProductControllers) != "undefined" && typeof(gProductControllers) === "object") 
+			{
+			    var gArtikel='';
+			    var gPreis='';
+			    for (var i=0; i < gProductControllers.length; i++) 
+			    {
+			         if (i>0)
+			         {
+			             gArtikel+=',';
+	                     gPreis+=',';
+			         }
+			         gArtikel+=gProductControllers[i].selectedArticle.getArtNo().slice(0,6);
+			         gPreis+=e_price_format(eCurrencyConvert(gProductControllers[i].selectedArticle.price));			  
+			    }
+			    var order_articles=[gArtikel];
+			    var order_prices=[gPreis];
+			    if (typeof(emospro)!='undefined' && typeof emospro.basket=='object')
+			    {
+			         var ecomm_quantity=emospro.basket[2];
+			         var order_value=emospro.basket[1];             
+			    }
+			     else
+		         {
+		         	 var ecomm_quantity=0;
+		             var order_value=0;   
+		         }
+	            addCustomParameter('ecomm_prodid',order_articles);
+	            addCustomParameter('ecomm_pvalue',order_prices);
+	            addCustomParameter('ecomm_quantity',ecomm_quantity);
+	            addCustomParameter('ecomm_totalvalue',order_value);
+			}
+		}
+}
+if (typeof(ecomm_pagetype)=='string')
+addCustomParameter('ecomm_pagetype',ecomm_pagetype);
+
+
+switch(e_domain)
+{
+	case "1":
+    gLabel="1038441788";
+    goLabel="W8QOCLD2qwQQvLqV7wM";
+	break;
+	case "2":
+	gLabel="1017091128";
+	goLabel="Hum3CNDRkSEQuKj-5AM";
+	break;
+	case "3":
+	gLabel="954453583";
+	goLabel="";
+	break;
+	case "4":
+	gLabel="1019237574";
+	goLabel="C-YXCIiz6gEQvLqV7wM";
+	break;
+}
+if (customParameters.length>0)
+{
+    for (var cP in customParameters)
+    {
+        if (cP>0)
+        cpString+=';';
+        cpString+=customParameters[cP];
+    }
+
+}
+else
+{
+    if (cpString.indexOf('pagetype')==-1)
+    {
+        cpString+='pagetype=other';
+    }
+}
+
+if(goLabel.length)
+ft_pixelURL.push(ft_pixelProtocol+'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&label='+goLabel+'&guid=ON&script=0&data='+cpString);
+else
+ft_pixelURL.push(ft_pixelProtocol+'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&guid=ON&script=0&data='+cpString);
+
+if (typeof(additionalGoogleNRTTag)!='undefined' && additionalGoogleNRTTag !== null && e_domain==='1') 
+ft_pixelURL.push(ft_pixelProtocol + 'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&guid=ON&script=0&label=' + additionalGoogleNRTTag);var _fbq = window._fbq || (window._fbq = []);
+_fbq.push(['addPixelId', "773581869321640"]);
+window._fbq = window._fbq || [];
+window._fbq.push(["track", "PixelInitialized", {}]);
+if (e_template==='productView')
+{
+	window._fbq.push(['track', 'ViewContent', {
+	  content_ids: [gProductController.selectedArticle.ArticleNo],
+	  content_type: 'product'
+	}]);
+	$('#pdv_addToBasket').click(function(){
+		window._fbq.push(["track", "AddToCart", { content_ids: [gProductController.selectedArticle.ArticleNo], content_type: "product"}])
+	})
+}
+else if(e_template==='checkout.content.step1')
+{
+   var fbItems=[];
+   if (typeof(eobItems)==='object')
+   {
+     for (var i=0; i<eobItems.length;i++)
+     {
+       
+       fbItems.push(eobItems[i][1]);
+     }
+   }
+   window._fbq.push(["track", "AddToCart", { content_ids: fbItems, content_type: "product"}])
+}
+else if(e_template ==='checkout.placedOrder.content')
+{
+	var fbItems=[];  
+	for (var i=0;i<emospro.ec_Event.length;i++)
+	{
+	  fbItems.push(emospro.ec_Event[i][1]);
+	}
+	window._fbq.push(["track", "Purchase", { content_ids: fbItems, content_type: "product"}])
+}
+ft_scriptURL.push(ft_pixelProtocol+'connect.facebook.net/en_US/fbds.js');/*
+ * jQuery MD5 Plugin 1.2.1
+ * https://github.com/blueimp/jQuery-MD5
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://creativecommons.org/licenses/MIT/
+ * 
+ * Based on
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.2 Copyright (C) Paul Johnston 1999 - 2009
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+
+/*jslint bitwise: true */
+/*global unescape, jQuery */
+
+(function ($) {
+    'use strict';
+
+    /*
+    * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+    * to work around bugs in some JS interpreters.
+    */
+    function safe_add(x, y) {
+        var lsw = (x & 0xFFFF) + (y & 0xFFFF),
+            msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+        return (msw << 16) | (lsw & 0xFFFF);
+    }
+
+    /*
+    * Bitwise rotate a 32-bit number to the left.
+    */
+    function bit_rol(num, cnt) {
+        return (num << cnt) | (num >>> (32 - cnt));
+    }
+
+    /*
+    * These functions implement the four basic operations the algorithm uses.
+    */
+    function md5_cmn(q, a, b, x, s, t) {
+        return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
+    }
+    function md5_ff(a, b, c, d, x, s, t) {
+        return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+    }
+    function md5_gg(a, b, c, d, x, s, t) {
+        return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+    }
+    function md5_hh(a, b, c, d, x, s, t) {
+        return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+    }
+    function md5_ii(a, b, c, d, x, s, t) {
+        return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+    }
+
+    /*
+    * Calculate the MD5 of an array of little-endian words, and a bit length.
+    */
+    function binl_md5(x, len) {
+        /* append padding */
+        x[len >> 5] |= 0x80 << ((len) % 32);
+        x[(((len + 64) >>> 9) << 4) + 14] = len;
+
+        var i, olda, oldb, oldc, oldd,
+            a =  1732584193,
+            b = -271733879,
+            c = -1732584194,
+            d =  271733878;
+
+        for (i = 0; i < x.length; i += 16) {
+            olda = a;
+            oldb = b;
+            oldc = c;
+            oldd = d;
+
+            a = md5_ff(a, b, c, d, x[i],       7, -680876936);
+            d = md5_ff(d, a, b, c, x[i +  1], 12, -389564586);
+            c = md5_ff(c, d, a, b, x[i +  2], 17,  606105819);
+            b = md5_ff(b, c, d, a, x[i +  3], 22, -1044525330);
+            a = md5_ff(a, b, c, d, x[i +  4],  7, -176418897);
+            d = md5_ff(d, a, b, c, x[i +  5], 12,  1200080426);
+            c = md5_ff(c, d, a, b, x[i +  6], 17, -1473231341);
+            b = md5_ff(b, c, d, a, x[i +  7], 22, -45705983);
+            a = md5_ff(a, b, c, d, x[i +  8],  7,  1770035416);
+            d = md5_ff(d, a, b, c, x[i +  9], 12, -1958414417);
+            c = md5_ff(c, d, a, b, x[i + 10], 17, -42063);
+            b = md5_ff(b, c, d, a, x[i + 11], 22, -1990404162);
+            a = md5_ff(a, b, c, d, x[i + 12],  7,  1804603682);
+            d = md5_ff(d, a, b, c, x[i + 13], 12, -40341101);
+            c = md5_ff(c, d, a, b, x[i + 14], 17, -1502002290);
+            b = md5_ff(b, c, d, a, x[i + 15], 22,  1236535329);
+
+            a = md5_gg(a, b, c, d, x[i +  1],  5, -165796510);
+            d = md5_gg(d, a, b, c, x[i +  6],  9, -1069501632);
+            c = md5_gg(c, d, a, b, x[i + 11], 14,  643717713);
+            b = md5_gg(b, c, d, a, x[i],      20, -373897302);
+            a = md5_gg(a, b, c, d, x[i +  5],  5, -701558691);
+            d = md5_gg(d, a, b, c, x[i + 10],  9,  38016083);
+            c = md5_gg(c, d, a, b, x[i + 15], 14, -660478335);
+            b = md5_gg(b, c, d, a, x[i +  4], 20, -405537848);
+            a = md5_gg(a, b, c, d, x[i +  9],  5,  568446438);
+            d = md5_gg(d, a, b, c, x[i + 14],  9, -1019803690);
+            c = md5_gg(c, d, a, b, x[i +  3], 14, -187363961);
+            b = md5_gg(b, c, d, a, x[i +  8], 20,  1163531501);
+            a = md5_gg(a, b, c, d, x[i + 13],  5, -1444681467);
+            d = md5_gg(d, a, b, c, x[i +  2],  9, -51403784);
+            c = md5_gg(c, d, a, b, x[i +  7], 14,  1735328473);
+            b = md5_gg(b, c, d, a, x[i + 12], 20, -1926607734);
+
+            a = md5_hh(a, b, c, d, x[i +  5],  4, -378558);
+            d = md5_hh(d, a, b, c, x[i +  8], 11, -2022574463);
+            c = md5_hh(c, d, a, b, x[i + 11], 16,  1839030562);
+            b = md5_hh(b, c, d, a, x[i + 14], 23, -35309556);
+            a = md5_hh(a, b, c, d, x[i +  1],  4, -1530992060);
+            d = md5_hh(d, a, b, c, x[i +  4], 11,  1272893353);
+            c = md5_hh(c, d, a, b, x[i +  7], 16, -155497632);
+            b = md5_hh(b, c, d, a, x[i + 10], 23, -1094730640);
+            a = md5_hh(a, b, c, d, x[i + 13],  4,  681279174);
+            d = md5_hh(d, a, b, c, x[i],      11, -358537222);
+            c = md5_hh(c, d, a, b, x[i +  3], 16, -722521979);
+            b = md5_hh(b, c, d, a, x[i +  6], 23,  76029189);
+            a = md5_hh(a, b, c, d, x[i +  9],  4, -640364487);
+            d = md5_hh(d, a, b, c, x[i + 12], 11, -421815835);
+            c = md5_hh(c, d, a, b, x[i + 15], 16,  530742520);
+            b = md5_hh(b, c, d, a, x[i +  2], 23, -995338651);
+
+            a = md5_ii(a, b, c, d, x[i],       6, -198630844);
+            d = md5_ii(d, a, b, c, x[i +  7], 10,  1126891415);
+            c = md5_ii(c, d, a, b, x[i + 14], 15, -1416354905);
+            b = md5_ii(b, c, d, a, x[i +  5], 21, -57434055);
+            a = md5_ii(a, b, c, d, x[i + 12],  6,  1700485571);
+            d = md5_ii(d, a, b, c, x[i +  3], 10, -1894986606);
+            c = md5_ii(c, d, a, b, x[i + 10], 15, -1051523);
+            b = md5_ii(b, c, d, a, x[i +  1], 21, -2054922799);
+            a = md5_ii(a, b, c, d, x[i +  8],  6,  1873313359);
+            d = md5_ii(d, a, b, c, x[i + 15], 10, -30611744);
+            c = md5_ii(c, d, a, b, x[i +  6], 15, -1560198380);
+            b = md5_ii(b, c, d, a, x[i + 13], 21,  1309151649);
+            a = md5_ii(a, b, c, d, x[i +  4],  6, -145523070);
+            d = md5_ii(d, a, b, c, x[i + 11], 10, -1120210379);
+            c = md5_ii(c, d, a, b, x[i +  2], 15,  718787259);
+            b = md5_ii(b, c, d, a, x[i +  9], 21, -343485551);
+
+            a = safe_add(a, olda);
+            b = safe_add(b, oldb);
+            c = safe_add(c, oldc);
+            d = safe_add(d, oldd);
+        }
+        return [a, b, c, d];
+    }
+
+    /*
+    * Convert an array of little-endian words to a string
+    */
+    function binl2rstr(input) {
+        var i,
+            output = '';
+        for (i = 0; i < input.length * 32; i += 8) {
+            output += String.fromCharCode((input[i >> 5] >>> (i % 32)) & 0xFF);
+        }
+        return output;
+    }
+
+    /*
+    * Convert a raw string to an array of little-endian words
+    * Characters >255 have their high-byte silently ignored.
+    */
+    function rstr2binl(input) {
+        var i,
+            output = [];
+        output[(input.length >> 2) - 1] = undefined;
+        for (i = 0; i < output.length; i += 1) {
+            output[i] = 0;
+        }
+        for (i = 0; i < input.length * 8; i += 8) {
+            output[i >> 5] |= (input.charCodeAt(i / 8) & 0xFF) << (i % 32);
+        }
+        return output;
+    }
+
+    /*
+    * Calculate the MD5 of a raw string
+    */
+    function rstr_md5(s) {
+        return binl2rstr(binl_md5(rstr2binl(s), s.length * 8));
+    }
+
+    /*
+    * Calculate the HMAC-MD5, of a key and some data (raw strings)
+    */
+    function rstr_hmac_md5(key, data) {
+        var i,
+            bkey = rstr2binl(key),
+            ipad = [],
+            opad = [],
+            hash;
+        ipad[15] = opad[15] = undefined;                        
+        if (bkey.length > 16) {
+            bkey = binl_md5(bkey, key.length * 8);
+        }
+        for (i = 0; i < 16; i += 1) {
+            ipad[i] = bkey[i] ^ 0x36363636;
+            opad[i] = bkey[i] ^ 0x5C5C5C5C;
+        }
+        hash = binl_md5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
+        return binl2rstr(binl_md5(opad.concat(hash), 512 + 128));
+    }
+
+    /*
+    * Convert a raw string to a hex string
+    */
+    function rstr2hex(input) {
+        var hex_tab = '0123456789abcdef',
+            output = '',
+            x,
+            i;
+        for (i = 0; i < input.length; i += 1) {
+            x = input.charCodeAt(i);
+            output += hex_tab.charAt((x >>> 4) & 0x0F) +
+                hex_tab.charAt(x & 0x0F);
+        }
+        return output;
+    }
+
+    /*
+    * Encode a string as utf-8
+    */
+    function str2rstr_utf8(input) {
+        return unescape(encodeURIComponent(input));
+    }
+
+    /*
+    * Take string arguments and return either raw or hex encoded strings
+    */
+    function raw_md5(s) {
+        return rstr_md5(str2rstr_utf8(s));
+    }
+    function hex_md5(s) {
+        return rstr2hex(raw_md5(s));
+    }
+    function raw_hmac_md5(k, d) {
+        return rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d));
+    }
+    function hex_hmac_md5(k, d) {
+        return rstr2hex(raw_hmac_md5(k, d));
+    }
+    
+    $.md5 = function (string, key, raw) {
+        if (!key) {
+            if (!raw) {
+                return hex_md5(string);
+            } else {
+                return raw_md5(string);
+            }
+        }
+        if (!raw) {
+            return hex_hmac_md5(key, string);
+        } else {
+            return raw_hmac_md5(key, string);
+        }
+    };
+    
+}(typeof jQuery === 'function' ? jQuery : this));
+switch (e_domain)
+{
+	case '1':
+	scCountry="heine";
+	scCurrency="EUR";
+	if(gIsTabletDevice){
+		scCountry+='-de-m'
+	}
+	break;
+	case '2':
+	scCountry="heine-at";
+	scCurrency="EUR";
+	break;
+	case '3':
+	scCountry="heine-ch";
+	scCurrency="CHF";
+	break;
+	case '4':
+	scCountry="heine-nl";
+	scCurrency="EUR";
+	break;
+	case '5':
+	scCountry="heine-uk";
+	scCurrency="GBP";
+	break;
+
+}
+
+switch (e_template)
+{
+	case "catentry":
+    case "categoryResultList":
+    case "mobile.categoryNavigationList":
+    case "mobile.categoryResultList":
+    
+	sonar_product={};
+	sonar_product.category=[];
+	if($('#breadcrumb li a').length)
+	{
+		var brelements=$('#breadcrumb li a');
+	}
+	else if($('.hidden.breadcrumb li a').length)
+	{
+		var brelements=$('.hidden.breadcrumb li a');
+	}
+	if(typeof brelements==='object')
+	{
+		i=0;
+		brelements.each(
+		function(){
+		if (i!=0)
+		sonar_product.category[i-1]=$(this).text();
+		i++;
+		}
+		);
+	}
+	break;
+	case "productView":
+	case "mobile.productView":
+	case "mobile.articleChange.productView":
+	
+	if (typeof(jsProductNo)=="string")
+	{
+		sonar_product={};
+	    sonar_product.identifier=jsProductNo;  
+	}
+	break;
+	case "checkout.content.step1":
+	case "checkout.content.step3":
+	case "mobile.checkout.content.step1":
+	case "mobile.checkout.content.step3":
+	var i=0;
+	var products=[];
+	for (var pc in gProductControllers)
+	{
+		var ctrl=gProductControllers[pc];
+		var sproduct={};
+		sproduct.identifier=String(ctrl.selectedArticle.parent.variations[0].Attributes.ProductId);
+		sproduct.amount=String(e_price_format(ctrl.selectedArticle.getSinglePricePC.value));
+		sproduct.currency=scCurrency;
+		sproduct.quantity=ctrl.selectedArticle.getQuantity.value;
+		products[pc]=sproduct;
+	}
+	sonar_basket={products:products};
+	break;
+}
+
+
+if (typeof(getECookie)==='function' && getECookie('showfooterPix')==='true')
+{
+
+    if (typeof(sonar_basket)=='object')
+    {
+		econdaConsole('sonar_basket: ');
+		econdaConsole(sonar_basket);
+    }
+    if (typeof(sonar_product)=='object')
+    {
+        econdaConsole('sonar_product: ');
+		econdaConsole(sonar_product);
+    }
+}
+<!-- Sonar Customer Object -->
+
+var cIdentifier=String();
+var cSegment=String();
+if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) 
+{
+    var sObj = JSON.parse(sessionStorage.getItem('sepia:data'));
+	sObj = sObj[0];
+	if (typeof sObj !== 'undefined') {
+	   	if(typeof(sObj.CustomerID)=='string')
+	   	cIdentifier=$.md5(sObj.CustomerID);
+	   	if(typeof(sObj.kuklanum)=='number')
+	   	cSegment=String(sObj.kuklanum);
+	   	if (typeof(sObj.retourenstatus)=='number')
+	   	{
+	   		if(sObj.retourenstatus==2)
+	   		{
+	   			cSegment='9';
+	   		}
+		}
+	}
+	var dd = null;
+	var dout = "";
+if (e_template === 'mobile.checkout.placedOrder.content' || e_template === 'checkout.placedOrder.content') 
+{
+	if (sObj.bisgelb && sObj.bisgelb > 0) 
+	{		    
+	     var tbg = sObj.bisgelb * 86400000; 
+	     var dd = new Date();dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+	     dd.setTime(dd.getTime() + tbg);
+	}
+} 
+else 
+{
+	if (typeof sObj !== 'undefined') {
+		ampelValide = (sObj.ampelValide && sObj.ampelValide === true); 
+		if (ampelValide) 
+		{
+			if (sObj.ampelGelb && sObj.ampelGelb > 0) 
+			{
+	        	var dd = new Date(sObj.ampelGelb);
+	        }
+		} 
+		else 
+		{
+			var tbg = sObj.bisgelb * 86400000;                   
+			var dd = new Date(sObj.bestelldat + tbg);
+			dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);	
+		}      
+	}
+}
+if (dd !== null) 
+{
+	var mth = dd.getMonth() + 1;
+    if (mth < 10) mth = '0' + mth;
+    var daym = dd.getDate();
+    if (daym < 10) daym = '0' + daym; 
+    dout = dd.getFullYear() + '-' + mth + '-' + daym;
+}
+
+sonar_customer = {
+        identifier: cIdentifier, <!--  'customerID'als MD5 Hash, kann auch leer übergeben werden -->
+        segment: cSegment, <!-- 'customersegment' - 1,2,3,9 oder leer -->
+        date: dout <!-- 'date' - bitte als YYYY-MM-DD übergeben - kann auch leer übergeben werden -->
+    }; 
+}
+
+
+if (e_template=="mobile.checkout.placedOrder.content" || e_template=="checkout.placedOrder.content")
+{
+	switch (e_domain)
+{
+	case '1':
+	scCountry="heine";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='029')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	if(gIsTabletDevice){
+		scCountry+='-de-m'
+	}
+	break;
+	case '2':
+	scCountry="heine-at";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='041')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '3':
+	scCountry="heine-ch";
+	scCurrency="CHF";
+	if (getECookie('PixID')=='048')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '4':
+	scCountry="heine-nl";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='030')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '5':
+	scCountry="heine-uk";
+	scCurrency="GBP";
+	if (getECookie('PixID')=='056')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+
+}
+if (typeof(emospro)=='object' && typeof(emospro.billing)=='object' && typeof(econdaOrder)=='object')
+{
+	var products=[];
+	var i=0;
+	for(order in econdaOrder.orderItem) 
+	{
+		var sproduct={};
+	 	for(userDataItem in econdaOrder.orderItem[order].userData.userDataField) 
+	 	{
+		  	if (econdaOrder.orderItem[order].userData.userDataField[userDataItem].key == "ProductId") 
+		  	{
+			  		sproduct.identifier = econdaOrder.orderItem[order].userData.userDataField[userDataItem].value;
+			}    
+		}
+		if(typeof(econdaOrder.orderItem[order])=='object')
+		{
+		sproduct.amount = econdaOrder.orderItem[order].orderItemAmount.orderItemPrice.value;
+		sproduct.quantity= econdaOrder.orderItem[order].quantity.value;
+		}
+		products[i]=sproduct;
+		i++;
+	}
+	sonar_basket={
+	products:products,
+	transaction:emospro.heinesid,
+	amount:econdaOrder.orderAmount.totalProductPrice.value,
+	currency:scCurrency
+	};
+	econdaConsole('sonar_basket: ');
+	econdaConsole(sonar_basket);
+	econdaConsole(sonar_basket.products);
+}
+}
+ft_scriptURL[ft_scriptURL.length]=ft_pixelProtocol+"eu-sonar.sociomantic.com/js/2010-07-01/adpan/"+scCountry;
+
+
+
+
+
+
+var eperid=getECookie("eperid");
+switch(e_domain)
+{
+	case '1'://de
+	var trackerID = '10010415';
+	break;
+	case '2'://at
+	var trackerID = '10010422';
+	break;
+	case '4'://nl
+	var trackerID = '10010417';
+	break;
+}
+
+ft_pixelURL[ft_pixelURL.length]=ft_pixelProtocol+'ad.eanalyzer.de/'+trackerID+'?sid='+emospro.heinesid+'&erid='+eperid+'&mode=f';
+
+var accurrency='EUR';
+switch(e_domain)
+{
+
+	case "1"://de
+	var advertiserId='A2287877';
+	var trackDomain='nqpyrne.heine.de';
+	break;
+	case "2"://at
+	var advertiserId='A2599454';
+	var trackDomain='nqpyrne.heine.at';
+	break;
+	case "3"://ch
+	var advertiserId='A2604021';
+	accurrency='CHF';
+	var trackDomain='nqpyrne.heine.ch';
+	break;
+	case "4"://nl
+	var advertiserId='A2618588';
+	var trackDomain='nqpyrne.heine-shop.nl';
+	break;
+	
+}
+var dt=new Date();
+var ts=dt.getTime();
+var pPos=ft_pixelURL.length;
+var oref=encodeURIComponent(document.referrer);
+if (e_template!='checkout.placedOrder.content' && e_template!='mobile.checkout.placedOrder.content')
+{
+
+	ft_pixelURL[pPos]=ft_pixelProtocol+trackDomain+'/acv/'+advertiserId+'/acc?ts='+ts;
+	if (typeof(affiliateid)=='string' && typeof(actionid)=='string')
+	{
+		ft_pixelURL[pPos]+='&AffiliateID='+affiliateid+'&ActionID='+actionid;
+	}
+	else
+	{
+		ft_pixelURL[pPos]+='&AffiliateID=&ActionID=';
+	}
+	ft_pixelURL[pPos]+='&keyword=&smc=';
+	ft_pixelURL[pPos]+='&ci='+emospro.content+'&oref='+oref;
+}
+else
+{
+
+    if (typeof(emospro.ec_Event!="undefined"))
+    {
+	    bk="[";
+	    i=0;
+	    for (buy in emospro.ec_Event)
+	    {
+	       if (i>0)
+	       {
+	           bk+=",";
+	       }
+	        bk+='{"id":"'+emospro.ec_Event[buy][1]+'"';
+	        bk+=',"tc":"'+String("basket")+'"';
+	        bk+=',"pr":"'+String(emospro.ec_Event[buy][3])+'"';
+	        bk+=',"qt":"'+String(emospro.ec_Event[buy][5]+'"');
+	        bk+=',"pc":"unknown"}';
+	        i++;  
+	    }
+	    bk+="]";
+	    bk=escape(bk);
+    }
+    else
+    {
+        bk="";
+    }
+    var dt=new Date();
+    var ts=dt.getTime();
+    if (emospro.billing[0][5]==1)
+    {
+        nc=1;
+    }
+    else
+    {
+        nc=0;
+    }
+    ft_pixelURL[pPos]=ft_pixelProtocol+trackDomain+"/acv/"+advertiserId+"/aca?mod=s&ts="+ts;
+    ft_pixelURL[pPos]+="&cvt=Sale&cvid="+emospro.billing[0][0]+"&ov="+emospro.billing[0][3];
+    
+    ft_pixelURL[pPos]+="&oc="+accurrency+"&iv=&dc="+emospro.billing[0][9]+"&dv="+emospro.billing[0][10]+"&tc=basket&cuid="+emospro.billing[0][1];
+    ft_pixelURL[pPos]+="&icn="+nc+"&bk="+bk+"&ci="+emospro.content+"&oref="+oref;
+}
+				for (var pURL in ft_pixelURL)
+				{
+					ft_fp_asImage(ft_pixelURL[pURL]);
+				}
+				
+				for (var ifURL in ft_iframeURL)
+				{
+					ft_fp_asIFrame(ft_iframeURL[ifURL]);
+				}
+				
+				for (var sURL in ft_scriptURL)
+				{
+					ft_load_JSext(ft_scriptURL[sURL]);
+				}
+			}
+	
+	    });
+    }
+    else
+    {
+    		if (pix_fired==false)
+			{
+			    pix_fired=true;
+			    
+			var fire_xpl = false;
+var rplPrice = {
+	'1' : 'EUR',
+	'2' : 'EUR',
+	'3' : 'CHF',
+	'4' : 'EUR',
+	'5' : 'GBP'
+};
+
+switch (e_template) {
+	
+	/************************************/
+	/**************XPACK*****************/
+	/************************************/		
+	case 'categoryResultList':
+	case 'mobile.categoryResultList':
+			xpl_params = {};
+		    xpl_params.event_id = 'shop_visit';
+		    xpl_params.shop_id = jsCatName;	// Shopnummer
+		    xpl_params.shop_trackingproducts = '' ;
+		
+		    var i=0;
+		    if($('#products li.article-list-item').length)
+		    {
+		    $('#products li.article-list-item').each(
+		        function()
+		        {
+		        	var pn = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+		        	if (typeof pn == 'string') {
+			           	if (i!=0 && i<6)
+			            {
+			                xpl_params.shop_trackingproducts += ',';
+			            }
+			            if (i<6)
+			            { 
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			            		
+			            	}i++;		            	
+				           	xpl_params.shop_trackingproducts += pn;		                
+			            }
+			            else
+			            {
+			            	return;
+			            }
+	
+			            
+		            }
+		        }
+		    );
+		    }		    
+		    else
+		    {
+		    	 var i=0;
+		    	$('.xPackLink').each(function(){
+		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+		    		 	if (i<6){ 
+		    		 		if(i>0)
+		    		 		xpl_params.shop_trackingproducts += ',';
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           		}		            	
+				        	xpl_params.shop_trackingproducts += pn;		    
+				        	i++;            
+			        	}
+			        	else return;
+			        }
+		    	
+		    	})
+		    }
+		
+		    fire_xpl=true;
+
+		break;
+		
+	/************************************/
+	/*************DETAILVIEW*************/
+	/************************************/		
+	case 'productView':
+	case 'mobile.productView':
+
+			var xpl_params = {};
+		    xpl_params.event_id = 'product_view';
+		    if (typeof(jsCatName)!='undefined' && jsCatName!='')
+		    {
+		        xpl_params.shop_id = jsCatName;	// Shopnummer
+		    }
+		    else if($('.breadcrumb').data('root-category-id')!==null)
+		    {
+		    	xpl_params.shop_id = String($('.breadcrumb').data('root-category-id'));
+		    }
+		    else		    
+		    {
+		    	xpl_params.shop_id = String($('#breadcrumb').data('root-category-id'));
+		    }
+		    if (typeof(gProductController)=='object' && gProductController != null
+		    	&& typeof(gProductController.selectedArticle)=='object' && gProductController.selectedArticle != null
+		    	&& typeof(gProductController.selectedArticle.SKU)=='string')
+		    {
+		    	var pn = gProductController.selectedArticle.SKU.split('-')[0];
+		    }
+		    else
+		    {
+		    	var pn='XXXXXX'
+		    }
+		    while (pn.length < 6) {
+		    	pn = '0'+pn;
+		    }
+		    
+		    xpl_params.product_id = pn;
+		    		    
+		    var price = '';  
+		    if (gProductController!=null && gProductController.selectedArticle!=null && gProductController.selectedArticle.price!=null)
+		    {
+		    	price = gProductController.selectedArticle.price;
+		    }
+		    if (price.indexOf('&nbsp;') > -1) {
+		    	price = price.split('&nbsp;')[1];
+		    } else {
+		    	price = price.replace(rplPrice[e_domain], '');
+		    }
+		    
+		    xpl_params.product_price = price;
+		    
+			
+		    if ($('.js_article_price.sale').html()!=null)
+		    {
+		       xpl_params.product_onsale = 1;
+		    }
+		    else
+		    {
+		       xpl_params.product_onsale = 0;
+		    }
+		    
+		    fire_xpl=true;
+	
+	
+		break;
+	
+	/************************************/
+	/*********CHECKOUT*STEP*1************/
+	/************************************/
+	case 'checkout.content.step1':
+	case 'mobile.checkout.content.step1':
+			var xpl_params = {};
+		    xpl_params.event_id = 'add_to_basket';
+		    var artNos = [], quants = [];
+		    for (var i=0; i < gProductControllers.length; i++) {
+		        var ctrl = gProductControllers[i];
+		        artNos.push(ctrl.selectedArticle.Attributes.ArtNo);
+		        quants.push(ctrl.selectedArticle.getQuantity.value);
+		    }
+		    xpl_params.order_article = artNos.join(',');
+		    xpl_params.product_quantity = quants.join(',');
+		    
+		    fire_xpl = true;
+		break;
+			
+	/************************************/
+	/***************LOGIN****************/
+	/************************************/
+	case 'LogonSetup' :
+			var xpl_params = {};
+	    	xpl_params.event_id = 'login';
+	    	
+	    	fire_xpl=true;
+		break;
+		
+	/************************************/
+	/***************SEARCH***************/
+	/************************************/
+	case 'searchResultList' :
+	case 'mobile.searchResultList':
+	
+			var xpl_params = {};
+		    xpl_params.event_id = 'search_result';
+		    xpl_params.shop_trackingproducts = '';
+		    if(typeof(emospro.search)==='object')
+		    xpl_params.user_searchkeywords = emospro.search[0][0].replace(' ', '_');
+			
+			if ($('#products li.article-list-item').length)
+			{
+			    var i=0;
+				$('#products li.article-list-item').each(
+			        function()
+			        {
+			        	var pn = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+			        	if (typeof pn == 'string') {
+				            if (i<6)
+				            { 
+				            	while (pn.length < 6) {
+				            		pn = '0'+pn;
+				            	}		            	
+					           	xpl_params.shop_trackingproducts += pn;		                
+				            }
+				            if (i<5)
+				            {
+				                xpl_params.shop_trackingproducts += ',';
+				            }
+				            i++;
+				        }
+			        }
+			    );
+		    }
+		    
+		    else
+		    {
+		    	 var i=0;
+		    	$('.xPackLink').each(function(){
+ 		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+		    		 	if (i<6){ 
+		    		 		if(i>0)
+		    		 		xpl_params.shop_trackingproducts += ',';
+			            	while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           		}	
+            	
+				        	xpl_params.shop_trackingproducts += pn;		    
+				        	i++;            
+			        	}
+			        	else
+			            {
+			            	return false;
+			            }	
+		    		}
+		    	})
+		    }
+		
+    		fire_xpl=true;
+		
+		break;
+		
+	/************************************/
+	/************PLACED ORDER ***********/
+	/************************************/
+	
+	case 'checkout.placedOrder.content' : 
+	case 'mobile.checkout.placedOrder.content' :
+			
+			var xpl_params = {};
+		    xpl_params.event_id = 'order';
+		    xpl_params.order_article = '';
+		    xpl_params.product_quantity = '';
+		    xpl_params.order_total = '';
+		    xpl_params.order_revenue = '';
+		    xpl_params.order_id = '';
+		    xpl_params.xpl_sale = 'false';
+		
+		    for (var bought in emospro.ec_Event)
+		    {
+		        xpl_params.order_article    += emospro.ec_Event[bought][1].match(/[0-9]{0,6}/g)[0];
+		        xpl_params.product_quantity += emospro.ec_Event[bought][5];
+		        xpl_params.order_revenue    += emospro.ec_Event[bought][3];
+		        if (bought  < (emospro.ec_Event.length-1))
+		        {
+		            xpl_params.order_article    += ',';
+		            xpl_params.product_quantity += ',';
+		            xpl_params.order_revenue    += ',';
+		        }
+		    }
+		    xpl_params.order_total = emospro.billing[0][3];
+		    xpl_params.order_id = emospro.billing[0][0];
+			
+			switch (pixID) {
+				case '037' :
+						if (e_domain=='1') {
+							xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        case '038' :
+			         	if (e_domain=='2') {
+			         		xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        case '039' :
+			        	if (e_domain=='3') {
+			        		xpl_params.xpl_sale = 'true';
+			          	}
+		         	break;
+		         
+		        
+		    }
+		    fire_xpl=true;
+			
+		break;
+		
+	default : 
+	
+		break;
+	
+} 
+
+
+if (fire_xpl==true)
+{
+	var localCustomer = null;  
+	switch (e_domain) {
+		case '1' : 
+				localCustomer = 'heine.de';
+			break;
+		case '2' : 
+				localCustomer = 'heine.at';
+			break;			
+		case '3' : 
+				localCustomer = 'heine.ch';
+			break;
+		case '4' : 
+				localCustomer = 'heine.nl';
+			break;
+		case '5' : 
+				localCustomer = 'heine.co.uk';
+			break;
+		default :
+				localCustomer = 'unknown';
+	}
+    
+    var localParameters='';
+    try {
+        for (xpl_param in xpl_params) {
+            localParameters += '&' + xpl_param + '=' + encodeURIComponent(xpl_params[xpl_param]);
+        }
+    } catch(e) {
+        console.log('Error: ' + e);
+    }
+    ft_iframeURL[ft_iframeURL.length] = ft_pixelProtocol + 'ssl.xplosion.de/profiler.html?customer=' + localCustomer + localParameters;
+    		econdaConsole('----------------------')
+		econdaConsole('  xplosion debugging')	
+		econdaConsole(xpl_params)
+				
+		econdaConsole('xplosion debugging end')
+		econdaConsole('----------------------')
+}
+
+var siteType='d';
+if (gIsTabletDevice==true)
+{
+	siteType='m';
+}
+
+var criteo_account = null;
+switch (e_domain) {
+	case '5' : // UK
+			criteo_account = '10977';
+		break;  
+	case '4' : // NL
+			criteo_account = '1654';
+		break;  
+	case '3' : // CH
+			if (e_language == '21') { // french
+				criteo_account = '4037';
+			} else if (e_language == '31'){ // german
+				criteo_account = '4038';
+			}			
+		break;  
+	case '2' : // AT
+			criteo_account = '4036';
+		break;  
+	case '1' : // DE
+			criteo_account = '3868';
+		break;  
+	default : 
+			criteo_account = 'unknown';
+}
+
+
+switch (e_template)
+{
+	case 'homepage':
+	case 'mobile.homepage':
+			var critEvent='viewHome';
+		break;
+
+	case 'categoryResultList':
+	case 'searchResultList':
+	case 'mobile.categoryResultList':
+	case 'mobile.searchResultList':
+			var critEvent='viewList';
+			var critItems = new Array();
+			
+			if($('#products li.article-list-item').length)
+			{
+				$('#products li.article-list-item').slice(0,3).each(function(index) {
+					var tempItem = $(this).find('.a-color-link:first').attr('data-colorpartnumber');
+					
+					while (tempItem.length < 6) {
+						tempItem = '0'+tempItem;
+					}
+					
+					critItems[index]=tempItem;
+									
+				});
+			}
+			
+			else
+			{
+				var count=0;
+		    	$('.xPackLink').each(function(index){
+		    		var splittedURI = $(this).attr('href').split('#');
+ 		    			fragment = (splittedURI.length > 1) ? $(this).attr('href').split('#')[1] : null,
+	    		 		pn = (typeof fragment == 'string') ? HashHandle('get', fragment).partNumber : null;
+		    		 if (typeof pn == 'string') {
+			            while (pn.length < 6) {
+			            		pn = '0'+pn;
+			           	}		            	
+				       	critItems[index] = pn;		 
+				       	count++;
+				       	if(count>=3)
+				       	return false;   
+				     }
+		    	});
+			}
+		break;
+		
+	case 'productView':
+	case 'mobile.productView':
+		if(typeof(gProductController)=='object' && gProductController != null
+		    	&& typeof(gProductController.selectedArticle)=='object' && gProductController.selectedArticle != null
+		    	&& typeof(gProductController.selectedArticle.SKU)=='string')
+		{
+			var critItems=gProductController.selectedArticle.SKU.split('-')[0];
+    		var critEvent='viewItem';
+		}
+		break;
+		
+	case 'checkout.content.step1':
+	case 'checkout.content.step3':
+	case 'mobile.checkout.content.step1':
+	case 'mobile.checkout.content.step3':
+
+			var critEvent='viewBasket';
+			var critItems=new Array();
+
+				for (var i=0; i < gProductControllers.length; i++) {
+					var product=new Object();
+					var ctrl = gProductControllers[i];
+		        	product.id=ctrl.selectedArticle.Attributes.ArtNo;
+		        	product.quantity=ctrl.selectedArticle.getQuantity.value;
+		        	product.price=ctrl.selectedArticle.getNetPricePCWithoutCurrency.value;
+					critItems[i]=product;
+				}
+				
+
+		
+		break;
+		  
+	case 'checkout.placedOrder.content':
+	case 'mobile.checkout.placedOrder.content':
+			var critU=false;
+			switch (pixID)
+		    {
+		        case '032' :
+		        if (e_domain=='1')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '033' :
+		        if (e_domain=='4')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '034' :
+		        if (e_domain=='3')
+		        {
+		            critU=true;
+		        }
+		        break;
+		        case '035' :
+		        if (e_domain=='2')
+		        {
+		        	critU=true;
+		        }
+		        break;
+		    }
+						
+			var critEvent='trackTransaction';
+		    var critItems=new Array();
+			var i=0;	
+			for(order in econdaOrder.orderItem) {
+		  		var product=new Object();
+			  	for(userDataItem in econdaOrder.orderItem[order].userData.userDataField) {
+			    	if (econdaOrder.orderItem[order].userData.userDataField[userDataItem].key == 'ArtNo') {
+			    		product.id = econdaOrder.orderItem[order].userData.userDataField[userDataItem].value;
+			    	}    
+			  	}
+		  		product.price = econdaOrder.orderItem[order].orderItemAmount.unitPrice.price.value;
+		  		product.quantity = econdaOrder.orderItem[order].quantity.value;
+		  		critItems[i]=product;
+			    i++;
+			}
+		break;
+}
+
+if (typeof(critEvent) !== 'undefined') {
+    window.criteo_q = window.criteo_q || []; 
+    var criteoParamArray = [];
+    var sepiaALCC = null, dout = null, sepiaCustomerID = '', hashedEmail = '', retourenStatus = null;
+    var ampelValide = false;   
+	if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) {
+	    var sObj = JSON.parse(sessionStorage.getItem('sepia:data'));
+	    	sObj = sObj[0];
+	    	
+	    if (sObj && sObj.kuklanum) {	        
+	        sepiaALCC = sObj.kuklanum;
+	    }
+	    if (sObj && sObj.CustomerID && sObj.CustomerID !== '') {
+	       sepiaCustomerID = sObj.CustomerID;
+	    }
+	    if (sObj) {
+	       var dd = null;
+	       if (e_template === 'checkout.placedOrder.content' || e_template === 'mobile.checkout.placedOrder.content') 
+	       {
+	           if (sObj.bisgelb && sObj.bisgelb > 0) 
+	           {		    
+		          var tbg = sObj.bisgelb * 86400000; 
+		          var dd = new Date();dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+		          dd.setTime(dd.getTime() + tbg);
+		       }
+		   } 
+		   else 
+		   {
+			if (typeof sObj !== 'undefined') {
+			      ampelValide = (sObj.ampelValide && sObj.ampelValide === true); 
+			      if (ampelValide) 
+			      {
+			        if (sObj.ampelGelb && sObj.ampelGelb > 0) 
+			        {
+	                  var dd = new Date(sObj.ampelGelb);
+	                }
+			      } 
+			      else 
+			      {
+			        if (sObj.bisgelb && sObj.bisgelb > 0 && sObj.bestelldat && sObj.bestelldat > 0) 
+			        {
+			          var tbg = sObj.bisgelb * 86400000;                   
+			          var dd = new Date(sObj.bestelldat + tbg);
+			          dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+			        }		
+			      }
+			}      
+		   }
+	       if (dd !== null) {
+	       		var mth = dd.getMonth() + 1;
+              if (mth < 10) mth = '0' + mth;
+              var daym = dd.getDate();
+              if (daym < 10) daym = '0' + daym; 
+              dout = dd.getFullYear() + '-' + mth + '-' + daym;
+           }
+	    }
+	    if(typeof sObj !== 'undefined' && typeof(sObj.emailhash)=='string')
+	    { 
+	    	hashedEmail = sObj.emailhash;
+	    }
+	    if (typeof sObj !== 'undefined') {
+	    	retourenStatus = sObj.retourenstatus;
+	    }
+	}	
+	
+    criteoParamArray.push({ event: 'setSiteType', type: siteType });   
+    criteoParamArray.push({ event: 'setHashedEmail', email: hashedEmail });
+    
+    var criteoMainEventObject = { event: critEvent };
+    if (sepiaALCC !== null) {
+    	
+    	criteoMainEventObject.user_segment = (retourenStatus == 1 || retourenStatus == 2) ? 9 : sepiaALCC;
+    	
+        
+        if (sepiaALCC > 0 && sepiaALCC < 4 && dout !== null) {
+            criteoParamArray.push({ event: 'viewSearch', dout: dout });
+        }
+    }
+    
+	
+    if (typeof(critItems) !== 'undefined') {    
+        if (typeof(critU) !== 'undefined') {            
+            criteoParamArray.push({ event: 'manualDising' });
+            criteoMainEventObject.id = emospro.billing[0][0];
+            criteoMainEventObject.new_customer = emospro.billing[0][5];
+            if (critU == true) {
+                criteoMainEventObject.deduplication = 1;
+            } else {
+                criteoMainEventObject.deduplication = 0;
+            }
+        }
+        criteoMainEventObject.item = critItems;                    
+    }
+    criteoParamArray.push(criteoMainEventObject);
+    if(typeof(window.criteo_q.concat)==='function')
+    window.criteo_q = window.criteo_q.concat(criteoParamArray);
+    window.criteo_q.push({ event: 'setAccount', account: criteo_account });
+    ft_scriptURL[ft_scriptURL.length]=ft_pixelProtocol+'static.criteo.net/js/ld/ld.js';
+    
+    econdaConsole('------------------------------------');
+    econdaConsole('          Criteo Debugging');
+    econdaConsole(criteoParamArray);
+    econdaConsole(criteoMainEventObject);
+    econdaConsole('      Criteo Debugging Ende');
+    econdaConsole('------------------------------------');
+    
+    
+    
+}var jetzt = new Date();
+switch(e_domain)
+{
+	case "1"://germany
+	var zanCountry='5794C2109782549';
+	break; 
+	case "2"://austria
+	var zanCountry='6019C1381685997';
+	break; 
+	case "4"://netherlands
+	var zanCountry='6022C2056773509';
+	break; 
+	
+}
+ft_pixelURL.push(ft_pixelProtocol+"ad.zanox.com/tpi/?"+zanCountry+"&mode=[[2]]&CID=[[pi_all]]&OrderID=[[" + (Math.random()*jetzt.getTime()) + "]]");var customParameters=new Array();
+var cpString=new String();
+var gLabel=new String();
+var goLabel=new String();
+
+function addCustomParameter(parName,parValue)
+{
+    customParameters[customParameters.length]=parName+'='+parValue;
+}
+if (e_domain!=='4')
+{
+	try
+	{	
+	    var kuklanum = 0;
+	    var additionalGoogleNRTTag = null;
+	    if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) {
+	       var sObj = JSON.parse(sessionStorage.getItem('sepia:data'))[0];
+		   if (sObj && sObj.kuklanum) {
+		       kuklanum = sObj.kuklanum;	           
+		   }
+		   if (!sObj.ampelGelb || sObj.ampelGelb == 0) {
+		       if (kuklanum == 3) kuklanum = 4;	       
+		   }
+		   if (sObj && sObj.retourenstatus && sObj.retourenstatus > 0) {
+		   	   kuklanum = 9;
+		   }
+	    }
+	    
+	    
+	    addCustomParameter('ecomm_custgroup', kuklanum);
+	    switch (kuklanum) {
+	            case 4:
+	                additionalGoogleNRTTag = '7gk6CNjF-gcQvLqV7wM';
+	                break;
+	            case 2:
+	                additionalGoogleNRTTag = '--kvCMjH-gcQvLqV7wM';
+	                break;
+	            case 1:
+	                additionalGoogleNRTTag = 'VA6wCMDI-gcQvLqV7wM';
+	                break;
+	            case 3:
+	                additionalGoogleNRTTag = 'rM9tCLDK-gcQvLqV7wM';
+	                break;
+	            case 9:
+	            	additionalGoogleNRTTag = 'omuLCKSil1YQvLqV7wM';
+	            	break;
+	            default: // 0
+	                additionalGoogleNRTTag = '7lIaCNDG-gcQvLqV7wM';
+	    }
+	
+	}
+	catch(e)
+	{
+		econdaConsole(e);
+	}
+}
+var i=0;	
+if (typeof(e_template)==='string')
+{
+    switch(e_template)
+    {
+        case 'homepage':  
+        case 'mobile.homepage':    
+        addCustomParameter('ecomm_pagetype','homepage');
+        break;
+
+        default:    
+        ecomm_pagetype='other';
+        if (typeof(jsCatName) != 'undefined' && jsCatName != '') 
+		{
+		  ecomm_pagetype='category';
+		  addCustomParameter('ecomm_catid',jsCatName);
+		  i++;
+		}
+		if ($("#breadcrumb li.last span").length>0)
+		{
+			var gcatName = $("#breadcrumb li.last span").html().replace(/&Auml;/g,"Ae").replace(/&auml;/g,"ae") .replace(/&Ouml;/g,"Oe") .replace(/&ouml;/g,"oe").replace(/&Uuml;/g,"Ue").replace(/&uuml;/g,"ue").replace(/&szlig;/g,"ss");
+			addCustomParameter('ecomm_category',encodeURI(gcatName));
+        }
+        else if($(".hidden.breadcrumb li.last span").length)
+        {
+        	var gcatName = $(".hidden.breadcrumb li.last span").html().replace(/&Auml;/g,"Ae").replace(/&auml;/g,"ae") .replace(/&Ouml;/g,"Oe") .replace(/&ouml;/g,"oe").replace(/&Uuml;/g,"Ue").replace(/&uuml;/g,"ue").replace(/&szlig;/g,"ss");
+        	addCustomParameter('ecomm_category',encodeURI(gcatName));
+        }
+        if (e_template==='productView' || e_template==='mobile.productView')
+        {    
+	        ecomm_pagetype='product';
+	        if (typeof(gProductController)=='object' && typeof(gProductController.selectedArticle)=='object') 
+	        {
+		        // var ecomm_prodid=gProductController.selectedArticle.getArticleNo().replace('X','').replace('Y','');
+		        var ecomm_prodid="";
+		        if (gProductController != null && gProductController.selectedArticle != null) 
+		        {
+			        ecomm_prodid=gProductController.selectedArticle.getArticleNo().replace('X','').replace('Y','');
+		        }
+		        if (ecomm_prodid != null) 
+		        {
+		            addCustomParameter('ecomm_prodid',ecomm_prodid);
+		        }
+		        if (gProductController != null && gProductController.selectedArticle != null && gProductController.selectedArticle.price != null) 
+		        {
+		        	var ecomm_pvalue=eCurrencyConvert(gProductController.selectedArticle.price);
+		        }
+		        if (ecomm_pvalue != null) 
+		        {
+		            addCustomParameter('ecomm_pvalue',e_price_format(ecomm_pvalue));
+		        }
+		    }
+		}
+
+	    break;
+	    case 'checkout.placedOrder.content':
+	    case 'mobile.checkout.placedOrder.content':
+        ecomm_pagetype='purchase';
+        var gArtikel='';
+        var gPreis='';
+	    for (var bought in emospro.ec_Event)
+	    {
+	        if (bought  > 0)
+            {
+                gArtikel+=',';
+                gPreis+=',';
+            }
+	        gArtikel   += emospro.ec_Event[bought][1].slice(0,6);
+	        gPreis    += emospro.ec_Event[bought][3];
+	     }
+	     var order_articles=[gArtikel];
+         var order_prices=[gPreis];
+         if (typeof(emospro)!='undefined' && typeof emospro.basket=='object')
+         {
+             var ecomm_quantity=emospro.basket[2];
+             var order_value=emospro.basket[1];             
+         }
+         else
+         {
+         	 var ecomm_quantity=0;
+             var order_value=0;   
+         }
+         addCustomParameter('ecomm_prodid',order_articles);
+         addCustomParameter('ecomm_pvalue',order_prices);
+         addCustomParameter('ecomm_quantity',ecomm_quantity);
+         addCustomParameter('ecomm_totalvalue',order_value);
+         break;
+	    }
+	    if (e_template.indexOf('checkout')!=-1 && e_template!='checkout.placedOrder.content' && e_template!='mobile.checkout.placedOrder.content')
+	    {
+	    	if (e_template!='checkout.content.step1' && e_template!='mobile.checkout.content.step1')
+	    	{
+	        	var ecomm_pagetype='checkout';
+            }
+            else
+            {
+            	var ecomm_pagetype='basket';
+			}
+			if(typeof(gProductControllers) != "undefined" && typeof(gProductControllers) === "object") 
+			{
+			    var gArtikel='';
+			    var gPreis='';
+			    for (var i=0; i < gProductControllers.length; i++) 
+			    {
+			         if (i>0)
+			         {
+			             gArtikel+=',';
+	                     gPreis+=',';
+			         }
+			         gArtikel+=gProductControllers[i].selectedArticle.getArtNo().slice(0,6);
+			         gPreis+=e_price_format(eCurrencyConvert(gProductControllers[i].selectedArticle.price));			  
+			    }
+			    var order_articles=[gArtikel];
+			    var order_prices=[gPreis];
+			    if (typeof(emospro)!='undefined' && typeof emospro.basket=='object')
+			    {
+			         var ecomm_quantity=emospro.basket[2];
+			         var order_value=emospro.basket[1];             
+			    }
+			     else
+		         {
+		         	 var ecomm_quantity=0;
+		             var order_value=0;   
+		         }
+	            addCustomParameter('ecomm_prodid',order_articles);
+	            addCustomParameter('ecomm_pvalue',order_prices);
+	            addCustomParameter('ecomm_quantity',ecomm_quantity);
+	            addCustomParameter('ecomm_totalvalue',order_value);
+			}
+		}
+}
+if (typeof(ecomm_pagetype)=='string')
+addCustomParameter('ecomm_pagetype',ecomm_pagetype);
+
+
+switch(e_domain)
+{
+	case "1":
+    gLabel="1038441788";
+    goLabel="W8QOCLD2qwQQvLqV7wM";
+	break;
+	case "2":
+	gLabel="1017091128";
+	goLabel="Hum3CNDRkSEQuKj-5AM";
+	break;
+	case "3":
+	gLabel="954453583";
+	goLabel="";
+	break;
+	case "4":
+	gLabel="1019237574";
+	goLabel="C-YXCIiz6gEQvLqV7wM";
+	break;
+}
+if (customParameters.length>0)
+{
+    for (var cP in customParameters)
+    {
+        if (cP>0)
+        cpString+=';';
+        cpString+=customParameters[cP];
+    }
+
+}
+else
+{
+    if (cpString.indexOf('pagetype')==-1)
+    {
+        cpString+='pagetype=other';
+    }
+}
+
+if(goLabel.length)
+ft_pixelURL.push(ft_pixelProtocol+'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&label='+goLabel+'&guid=ON&script=0&data='+cpString);
+else
+ft_pixelURL.push(ft_pixelProtocol+'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&guid=ON&script=0&data='+cpString);
+
+if (typeof(additionalGoogleNRTTag)!='undefined' && additionalGoogleNRTTag !== null && e_domain==='1') 
+ft_pixelURL.push(ft_pixelProtocol + 'googleads.g.doubleclick.net/pagead/viewthroughconversion/'+gLabel+'/?value=0&guid=ON&script=0&label=' + additionalGoogleNRTTag);var _fbq = window._fbq || (window._fbq = []);
+_fbq.push(['addPixelId', "773581869321640"]);
+window._fbq = window._fbq || [];
+window._fbq.push(["track", "PixelInitialized", {}]);
+if (e_template==='productView')
+{
+	window._fbq.push(['track', 'ViewContent', {
+	  content_ids: [gProductController.selectedArticle.ArticleNo],
+	  content_type: 'product'
+	}]);
+	$('#pdv_addToBasket').click(function(){
+		window._fbq.push(["track", "AddToCart", { content_ids: [gProductController.selectedArticle.ArticleNo], content_type: "product"}])
+	})
+}
+else if(e_template==='checkout.content.step1')
+{
+   var fbItems=[];
+   if (typeof(eobItems)==='object')
+   {
+     for (var i=0; i<eobItems.length;i++)
+     {
+       
+       fbItems.push(eobItems[i][1]);
+     }
+   }
+   window._fbq.push(["track", "AddToCart", { content_ids: fbItems, content_type: "product"}])
+}
+else if(e_template ==='checkout.placedOrder.content')
+{
+	var fbItems=[];  
+	for (var i=0;i<emospro.ec_Event.length;i++)
+	{
+	  fbItems.push(emospro.ec_Event[i][1]);
+	}
+	window._fbq.push(["track", "Purchase", { content_ids: fbItems, content_type: "product"}])
+}
+ft_scriptURL.push(ft_pixelProtocol+'connect.facebook.net/en_US/fbds.js');/*
+ * jQuery MD5 Plugin 1.2.1
+ * https://github.com/blueimp/jQuery-MD5
+ *
+ * Copyright 2010, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://creativecommons.org/licenses/MIT/
+ * 
+ * Based on
+ * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
+ * Digest Algorithm, as defined in RFC 1321.
+ * Version 2.2 Copyright (C) Paul Johnston 1999 - 2009
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ * Distributed under the BSD License
+ * See http://pajhome.org.uk/crypt/md5 for more info.
+ */
+
+/*jslint bitwise: true */
+/*global unescape, jQuery */
+
+(function ($) {
+    'use strict';
+
+    /*
+    * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+    * to work around bugs in some JS interpreters.
+    */
+    function safe_add(x, y) {
+        var lsw = (x & 0xFFFF) + (y & 0xFFFF),
+            msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+        return (msw << 16) | (lsw & 0xFFFF);
+    }
+
+    /*
+    * Bitwise rotate a 32-bit number to the left.
+    */
+    function bit_rol(num, cnt) {
+        return (num << cnt) | (num >>> (32 - cnt));
+    }
+
+    /*
+    * These functions implement the four basic operations the algorithm uses.
+    */
+    function md5_cmn(q, a, b, x, s, t) {
+        return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b);
+    }
+    function md5_ff(a, b, c, d, x, s, t) {
+        return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t);
+    }
+    function md5_gg(a, b, c, d, x, s, t) {
+        return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t);
+    }
+    function md5_hh(a, b, c, d, x, s, t) {
+        return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+    }
+    function md5_ii(a, b, c, d, x, s, t) {
+        return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+    }
+
+    /*
+    * Calculate the MD5 of an array of little-endian words, and a bit length.
+    */
+    function binl_md5(x, len) {
+        /* append padding */
+        x[len >> 5] |= 0x80 << ((len) % 32);
+        x[(((len + 64) >>> 9) << 4) + 14] = len;
+
+        var i, olda, oldb, oldc, oldd,
+            a =  1732584193,
+            b = -271733879,
+            c = -1732584194,
+            d =  271733878;
+
+        for (i = 0; i < x.length; i += 16) {
+            olda = a;
+            oldb = b;
+            oldc = c;
+            oldd = d;
+
+            a = md5_ff(a, b, c, d, x[i],       7, -680876936);
+            d = md5_ff(d, a, b, c, x[i +  1], 12, -389564586);
+            c = md5_ff(c, d, a, b, x[i +  2], 17,  606105819);
+            b = md5_ff(b, c, d, a, x[i +  3], 22, -1044525330);
+            a = md5_ff(a, b, c, d, x[i +  4],  7, -176418897);
+            d = md5_ff(d, a, b, c, x[i +  5], 12,  1200080426);
+            c = md5_ff(c, d, a, b, x[i +  6], 17, -1473231341);
+            b = md5_ff(b, c, d, a, x[i +  7], 22, -45705983);
+            a = md5_ff(a, b, c, d, x[i +  8],  7,  1770035416);
+            d = md5_ff(d, a, b, c, x[i +  9], 12, -1958414417);
+            c = md5_ff(c, d, a, b, x[i + 10], 17, -42063);
+            b = md5_ff(b, c, d, a, x[i + 11], 22, -1990404162);
+            a = md5_ff(a, b, c, d, x[i + 12],  7,  1804603682);
+            d = md5_ff(d, a, b, c, x[i + 13], 12, -40341101);
+            c = md5_ff(c, d, a, b, x[i + 14], 17, -1502002290);
+            b = md5_ff(b, c, d, a, x[i + 15], 22,  1236535329);
+
+            a = md5_gg(a, b, c, d, x[i +  1],  5, -165796510);
+            d = md5_gg(d, a, b, c, x[i +  6],  9, -1069501632);
+            c = md5_gg(c, d, a, b, x[i + 11], 14,  643717713);
+            b = md5_gg(b, c, d, a, x[i],      20, -373897302);
+            a = md5_gg(a, b, c, d, x[i +  5],  5, -701558691);
+            d = md5_gg(d, a, b, c, x[i + 10],  9,  38016083);
+            c = md5_gg(c, d, a, b, x[i + 15], 14, -660478335);
+            b = md5_gg(b, c, d, a, x[i +  4], 20, -405537848);
+            a = md5_gg(a, b, c, d, x[i +  9],  5,  568446438);
+            d = md5_gg(d, a, b, c, x[i + 14],  9, -1019803690);
+            c = md5_gg(c, d, a, b, x[i +  3], 14, -187363961);
+            b = md5_gg(b, c, d, a, x[i +  8], 20,  1163531501);
+            a = md5_gg(a, b, c, d, x[i + 13],  5, -1444681467);
+            d = md5_gg(d, a, b, c, x[i +  2],  9, -51403784);
+            c = md5_gg(c, d, a, b, x[i +  7], 14,  1735328473);
+            b = md5_gg(b, c, d, a, x[i + 12], 20, -1926607734);
+
+            a = md5_hh(a, b, c, d, x[i +  5],  4, -378558);
+            d = md5_hh(d, a, b, c, x[i +  8], 11, -2022574463);
+            c = md5_hh(c, d, a, b, x[i + 11], 16,  1839030562);
+            b = md5_hh(b, c, d, a, x[i + 14], 23, -35309556);
+            a = md5_hh(a, b, c, d, x[i +  1],  4, -1530992060);
+            d = md5_hh(d, a, b, c, x[i +  4], 11,  1272893353);
+            c = md5_hh(c, d, a, b, x[i +  7], 16, -155497632);
+            b = md5_hh(b, c, d, a, x[i + 10], 23, -1094730640);
+            a = md5_hh(a, b, c, d, x[i + 13],  4,  681279174);
+            d = md5_hh(d, a, b, c, x[i],      11, -358537222);
+            c = md5_hh(c, d, a, b, x[i +  3], 16, -722521979);
+            b = md5_hh(b, c, d, a, x[i +  6], 23,  76029189);
+            a = md5_hh(a, b, c, d, x[i +  9],  4, -640364487);
+            d = md5_hh(d, a, b, c, x[i + 12], 11, -421815835);
+            c = md5_hh(c, d, a, b, x[i + 15], 16,  530742520);
+            b = md5_hh(b, c, d, a, x[i +  2], 23, -995338651);
+
+            a = md5_ii(a, b, c, d, x[i],       6, -198630844);
+            d = md5_ii(d, a, b, c, x[i +  7], 10,  1126891415);
+            c = md5_ii(c, d, a, b, x[i + 14], 15, -1416354905);
+            b = md5_ii(b, c, d, a, x[i +  5], 21, -57434055);
+            a = md5_ii(a, b, c, d, x[i + 12],  6,  1700485571);
+            d = md5_ii(d, a, b, c, x[i +  3], 10, -1894986606);
+            c = md5_ii(c, d, a, b, x[i + 10], 15, -1051523);
+            b = md5_ii(b, c, d, a, x[i +  1], 21, -2054922799);
+            a = md5_ii(a, b, c, d, x[i +  8],  6,  1873313359);
+            d = md5_ii(d, a, b, c, x[i + 15], 10, -30611744);
+            c = md5_ii(c, d, a, b, x[i +  6], 15, -1560198380);
+            b = md5_ii(b, c, d, a, x[i + 13], 21,  1309151649);
+            a = md5_ii(a, b, c, d, x[i +  4],  6, -145523070);
+            d = md5_ii(d, a, b, c, x[i + 11], 10, -1120210379);
+            c = md5_ii(c, d, a, b, x[i +  2], 15,  718787259);
+            b = md5_ii(b, c, d, a, x[i +  9], 21, -343485551);
+
+            a = safe_add(a, olda);
+            b = safe_add(b, oldb);
+            c = safe_add(c, oldc);
+            d = safe_add(d, oldd);
+        }
+        return [a, b, c, d];
+    }
+
+    /*
+    * Convert an array of little-endian words to a string
+    */
+    function binl2rstr(input) {
+        var i,
+            output = '';
+        for (i = 0; i < input.length * 32; i += 8) {
+            output += String.fromCharCode((input[i >> 5] >>> (i % 32)) & 0xFF);
+        }
+        return output;
+    }
+
+    /*
+    * Convert a raw string to an array of little-endian words
+    * Characters >255 have their high-byte silently ignored.
+    */
+    function rstr2binl(input) {
+        var i,
+            output = [];
+        output[(input.length >> 2) - 1] = undefined;
+        for (i = 0; i < output.length; i += 1) {
+            output[i] = 0;
+        }
+        for (i = 0; i < input.length * 8; i += 8) {
+            output[i >> 5] |= (input.charCodeAt(i / 8) & 0xFF) << (i % 32);
+        }
+        return output;
+    }
+
+    /*
+    * Calculate the MD5 of a raw string
+    */
+    function rstr_md5(s) {
+        return binl2rstr(binl_md5(rstr2binl(s), s.length * 8));
+    }
+
+    /*
+    * Calculate the HMAC-MD5, of a key and some data (raw strings)
+    */
+    function rstr_hmac_md5(key, data) {
+        var i,
+            bkey = rstr2binl(key),
+            ipad = [],
+            opad = [],
+            hash;
+        ipad[15] = opad[15] = undefined;                        
+        if (bkey.length > 16) {
+            bkey = binl_md5(bkey, key.length * 8);
+        }
+        for (i = 0; i < 16; i += 1) {
+            ipad[i] = bkey[i] ^ 0x36363636;
+            opad[i] = bkey[i] ^ 0x5C5C5C5C;
+        }
+        hash = binl_md5(ipad.concat(rstr2binl(data)), 512 + data.length * 8);
+        return binl2rstr(binl_md5(opad.concat(hash), 512 + 128));
+    }
+
+    /*
+    * Convert a raw string to a hex string
+    */
+    function rstr2hex(input) {
+        var hex_tab = '0123456789abcdef',
+            output = '',
+            x,
+            i;
+        for (i = 0; i < input.length; i += 1) {
+            x = input.charCodeAt(i);
+            output += hex_tab.charAt((x >>> 4) & 0x0F) +
+                hex_tab.charAt(x & 0x0F);
+        }
+        return output;
+    }
+
+    /*
+    * Encode a string as utf-8
+    */
+    function str2rstr_utf8(input) {
+        return unescape(encodeURIComponent(input));
+    }
+
+    /*
+    * Take string arguments and return either raw or hex encoded strings
+    */
+    function raw_md5(s) {
+        return rstr_md5(str2rstr_utf8(s));
+    }
+    function hex_md5(s) {
+        return rstr2hex(raw_md5(s));
+    }
+    function raw_hmac_md5(k, d) {
+        return rstr_hmac_md5(str2rstr_utf8(k), str2rstr_utf8(d));
+    }
+    function hex_hmac_md5(k, d) {
+        return rstr2hex(raw_hmac_md5(k, d));
+    }
+    
+    $.md5 = function (string, key, raw) {
+        if (!key) {
+            if (!raw) {
+                return hex_md5(string);
+            } else {
+                return raw_md5(string);
+            }
+        }
+        if (!raw) {
+            return hex_hmac_md5(key, string);
+        } else {
+            return raw_hmac_md5(key, string);
+        }
+    };
+    
+}(typeof jQuery === 'function' ? jQuery : this));
+switch (e_domain)
+{
+	case '1':
+	scCountry="heine";
+	scCurrency="EUR";
+	if(gIsTabletDevice){
+		scCountry+='-de-m'
+	}
+	break;
+	case '2':
+	scCountry="heine-at";
+	scCurrency="EUR";
+	break;
+	case '3':
+	scCountry="heine-ch";
+	scCurrency="CHF";
+	break;
+	case '4':
+	scCountry="heine-nl";
+	scCurrency="EUR";
+	break;
+	case '5':
+	scCountry="heine-uk";
+	scCurrency="GBP";
+	break;
+
+}
+
+switch (e_template)
+{
+	case "catentry":
+    case "categoryResultList":
+    case "mobile.categoryNavigationList":
+    case "mobile.categoryResultList":
+    
+	sonar_product={};
+	sonar_product.category=[];
+	if($('#breadcrumb li a').length)
+	{
+		var brelements=$('#breadcrumb li a');
+	}
+	else if($('.hidden.breadcrumb li a').length)
+	{
+		var brelements=$('.hidden.breadcrumb li a');
+	}
+	if(typeof brelements==='object')
+	{
+		i=0;
+		brelements.each(
+		function(){
+		if (i!=0)
+		sonar_product.category[i-1]=$(this).text();
+		i++;
+		}
+		);
+	}
+	break;
+	case "productView":
+	case "mobile.productView":
+	case "mobile.articleChange.productView":
+	
+	if (typeof(jsProductNo)=="string")
+	{
+		sonar_product={};
+	    sonar_product.identifier=jsProductNo;  
+	}
+	break;
+	case "checkout.content.step1":
+	case "checkout.content.step3":
+	case "mobile.checkout.content.step1":
+	case "mobile.checkout.content.step3":
+	var i=0;
+	var products=[];
+	for (var pc in gProductControllers)
+	{
+		var ctrl=gProductControllers[pc];
+		var sproduct={};
+		sproduct.identifier=String(ctrl.selectedArticle.parent.variations[0].Attributes.ProductId);
+		sproduct.amount=String(e_price_format(ctrl.selectedArticle.getSinglePricePC.value));
+		sproduct.currency=scCurrency;
+		sproduct.quantity=ctrl.selectedArticle.getQuantity.value;
+		products[pc]=sproduct;
+	}
+	sonar_basket={products:products};
+	break;
+}
+
+
+if (typeof(getECookie)==='function' && getECookie('showfooterPix')==='true')
+{
+
+    if (typeof(sonar_basket)=='object')
+    {
+		econdaConsole('sonar_basket: ');
+		econdaConsole(sonar_basket);
+    }
+    if (typeof(sonar_product)=='object')
+    {
+        econdaConsole('sonar_product: ');
+		econdaConsole(sonar_product);
+    }
+}
+<!-- Sonar Customer Object -->
+
+var cIdentifier=String();
+var cSegment=String();
+if (sessionStorage && sessionStorage.getItem('sepia:data') !== null) 
+{
+    var sObj = JSON.parse(sessionStorage.getItem('sepia:data'));
+	sObj = sObj[0];
+	if (typeof sObj !== 'undefined') {
+	   	if(typeof(sObj.CustomerID)=='string')
+	   	cIdentifier=$.md5(sObj.CustomerID);
+	   	if(typeof(sObj.kuklanum)=='number')
+	   	cSegment=String(sObj.kuklanum);
+	   	if (typeof(sObj.retourenstatus)=='number')
+	   	{
+	   		if(sObj.retourenstatus==2)
+	   		{
+	   			cSegment='9';
+	   		}
+		}
+	}
+	var dd = null;
+	var dout = "";
+if (e_template === 'mobile.checkout.placedOrder.content' || e_template === 'checkout.placedOrder.content') 
+{
+	if (sObj.bisgelb && sObj.bisgelb > 0) 
+	{		    
+	     var tbg = sObj.bisgelb * 86400000; 
+	     var dd = new Date();dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);
+	     dd.setTime(dd.getTime() + tbg);
+	}
+} 
+else 
+{
+	if (typeof sObj !== 'undefined') {
+		ampelValide = (sObj.ampelValide && sObj.ampelValide === true); 
+		if (ampelValide) 
+		{
+			if (sObj.ampelGelb && sObj.ampelGelb > 0) 
+			{
+	        	var dd = new Date(sObj.ampelGelb);
+	        }
+		} 
+		else 
+		{
+			var tbg = sObj.bisgelb * 86400000;                   
+			var dd = new Date(sObj.bestelldat + tbg);
+			dd.setHours(0);dd.setMinutes(0);dd.setSeconds(0);	
+		}      
+	}
+}
+if (dd !== null) 
+{
+	var mth = dd.getMonth() + 1;
+    if (mth < 10) mth = '0' + mth;
+    var daym = dd.getDate();
+    if (daym < 10) daym = '0' + daym; 
+    dout = dd.getFullYear() + '-' + mth + '-' + daym;
+}
+
+sonar_customer = {
+        identifier: cIdentifier, <!--  'customerID'als MD5 Hash, kann auch leer übergeben werden -->
+        segment: cSegment, <!-- 'customersegment' - 1,2,3,9 oder leer -->
+        date: dout <!-- 'date' - bitte als YYYY-MM-DD übergeben - kann auch leer übergeben werden -->
+    }; 
+}
+
+
+if (e_template=="mobile.checkout.placedOrder.content" || e_template=="checkout.placedOrder.content")
+{
+	switch (e_domain)
+{
+	case '1':
+	scCountry="heine";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='029')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	if(gIsTabletDevice){
+		scCountry+='-de-m'
+	}
+	break;
+	case '2':
+	scCountry="heine-at";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='041')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '3':
+	scCountry="heine-ch";
+	scCurrency="CHF";
+	if (getECookie('PixID')=='048')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '4':
+	scCountry="heine-nl";
+	scCurrency="EUR";
+	if (getECookie('PixID')=='030')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+	case '5':
+	scCountry="heine-uk";
+	scCurrency="GBP";
+	if (getECookie('PixID')=='056')
+	{
+		sonar_sale= {confirmed:true};
+	}
+	break;
+
+}
+if (typeof(emospro)=='object' && typeof(emospro.billing)=='object' && typeof(econdaOrder)=='object')
+{
+	var products=[];
+	var i=0;
+	for(order in econdaOrder.orderItem) 
+	{
+		var sproduct={};
+	 	for(userDataItem in econdaOrder.orderItem[order].userData.userDataField) 
+	 	{
+		  	if (econdaOrder.orderItem[order].userData.userDataField[userDataItem].key == "ProductId") 
+		  	{
+			  		sproduct.identifier = econdaOrder.orderItem[order].userData.userDataField[userDataItem].value;
+			}    
+		}
+		if(typeof(econdaOrder.orderItem[order])=='object')
+		{
+		sproduct.amount = econdaOrder.orderItem[order].orderItemAmount.orderItemPrice.value;
+		sproduct.quantity= econdaOrder.orderItem[order].quantity.value;
+		}
+		products[i]=sproduct;
+		i++;
+	}
+	sonar_basket={
+	products:products,
+	transaction:emospro.heinesid,
+	amount:econdaOrder.orderAmount.totalProductPrice.value,
+	currency:scCurrency
+	};
+	econdaConsole('sonar_basket: ');
+	econdaConsole(sonar_basket);
+	econdaConsole(sonar_basket.products);
+}
+}
+ft_scriptURL[ft_scriptURL.length]=ft_pixelProtocol+"eu-sonar.sociomantic.com/js/2010-07-01/adpan/"+scCountry;
+
+
+
+
+
+
+var eperid=getECookie("eperid");
+switch(e_domain)
+{
+	case '1'://de
+	var trackerID = '10010415';
+	break;
+	case '2'://at
+	var trackerID = '10010422';
+	break;
+	case '4'://nl
+	var trackerID = '10010417';
+	break;
+}
+
+ft_pixelURL[ft_pixelURL.length]=ft_pixelProtocol+'ad.eanalyzer.de/'+trackerID+'?sid='+emospro.heinesid+'&erid='+eperid+'&mode=f';
+
+var accurrency='EUR';
+switch(e_domain)
+{
+
+	case "1"://de
+	var advertiserId='A2287877';
+	var trackDomain='nqpyrne.heine.de';
+	break;
+	case "2"://at
+	var advertiserId='A2599454';
+	var trackDomain='nqpyrne.heine.at';
+	break;
+	case "3"://ch
+	var advertiserId='A2604021';
+	accurrency='CHF';
+	var trackDomain='nqpyrne.heine.ch';
+	break;
+	case "4"://nl
+	var advertiserId='A2618588';
+	var trackDomain='nqpyrne.heine-shop.nl';
+	break;
+	
+}
+var dt=new Date();
+var ts=dt.getTime();
+var pPos=ft_pixelURL.length;
+var oref=encodeURIComponent(document.referrer);
+if (e_template!='checkout.placedOrder.content' && e_template!='mobile.checkout.placedOrder.content')
+{
+
+	ft_pixelURL[pPos]=ft_pixelProtocol+trackDomain+'/acv/'+advertiserId+'/acc?ts='+ts;
+	if (typeof(affiliateid)=='string' && typeof(actionid)=='string')
+	{
+		ft_pixelURL[pPos]+='&AffiliateID='+affiliateid+'&ActionID='+actionid;
+	}
+	else
+	{
+		ft_pixelURL[pPos]+='&AffiliateID=&ActionID=';
+	}
+	ft_pixelURL[pPos]+='&keyword=&smc=';
+	ft_pixelURL[pPos]+='&ci='+emospro.content+'&oref='+oref;
+}
+else
+{
+
+    if (typeof(emospro.ec_Event!="undefined"))
+    {
+	    bk="[";
+	    i=0;
+	    for (buy in emospro.ec_Event)
+	    {
+	       if (i>0)
+	       {
+	           bk+=",";
+	       }
+	        bk+='{"id":"'+emospro.ec_Event[buy][1]+'"';
+	        bk+=',"tc":"'+String("basket")+'"';
+	        bk+=',"pr":"'+String(emospro.ec_Event[buy][3])+'"';
+	        bk+=',"qt":"'+String(emospro.ec_Event[buy][5]+'"');
+	        bk+=',"pc":"unknown"}';
+	        i++;  
+	    }
+	    bk+="]";
+	    bk=escape(bk);
+    }
+    else
+    {
+        bk="";
+    }
+    var dt=new Date();
+    var ts=dt.getTime();
+    if (emospro.billing[0][5]==1)
+    {
+        nc=1;
+    }
+    else
+    {
+        nc=0;
+    }
+    ft_pixelURL[pPos]=ft_pixelProtocol+trackDomain+"/acv/"+advertiserId+"/aca?mod=s&ts="+ts;
+    ft_pixelURL[pPos]+="&cvt=Sale&cvid="+emospro.billing[0][0]+"&ov="+emospro.billing[0][3];
+    
+    ft_pixelURL[pPos]+="&oc="+accurrency+"&iv=&dc="+emospro.billing[0][9]+"&dv="+emospro.billing[0][10]+"&tc=basket&cuid="+emospro.billing[0][1];
+    ft_pixelURL[pPos]+="&icn="+nc+"&bk="+bk+"&ci="+emospro.content+"&oref="+oref;
+}
+				for (var pURL in ft_pixelURL)
+				{
+					ft_fp_asImage(ft_pixelURL[pURL]);
+				}
+				
+				for (var ifURL in ft_iframeURL)
+				{
+					ft_fp_asIFrame(ft_iframeURL[ifURL]);
+				}
+				
+				for (var sURL in ft_scriptURL)
+				{
+					ft_load_JSext(ft_scriptURL[sURL]);
+				}
+			}
+    }
+});

@@ -1,0 +1,29 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* storefinder */
+
+.header-seperation-first {
+    float: right;
+    position: relative;
+    z-index: 10;
+    margin: 11px 0 0 10px;
+    padding: 0 0 0 13px;
+    font-size: 11px;
+    line-height: 18px;
+    color: #8e8682;
+}
+
+#header-storefinder {
+    float: right;
+    position: relative;
+    z-index: 10;
+    margin: 11px 0 0 10px;
+    padding: 0 0 0 13px;
+    font-size: 11px;
+    line-height: 18px;
+    color: #8e8682;
+    background: url('//pics3.esprit.de/Shop/images/default/global/icons/icon_esp_storefinder.png') 0 4px no-repeat;
+}
+
+#header-storefinder a {
+    color: inherit;
+}
